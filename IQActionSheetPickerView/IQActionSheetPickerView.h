@@ -1,10 +1,7 @@
 //
 // IQActionSheetPickerView.h
-// Hobizbo
-//
-// Created by Binod_Mac on 11/5/13.
-// Copyright (c) 2013 Hobizbo. All rights reserved.
-//
+// Created by Mohd Iftekhar Qurashi on 11/5/13.
+// Copyright (c) 2013 Iftekhar. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

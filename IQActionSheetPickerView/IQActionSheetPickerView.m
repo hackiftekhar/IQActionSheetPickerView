@@ -1,10 +1,7 @@
 //
 // IQActionSheetPickerView.m
-// Hobizbo
-//
-// Created by Binod_Mac on 11/5/13.
-// Copyright (c) 2013 Hobizbo. All rights reserved.
-//
+// Created by Mohd Iftekhar Qurashi on 11/5/13.
+// Copyright (c) 2013 Iftekhar. All rights reserved.
 
 #import "IQActionSheetPickerView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -12,9 +9,10 @@
 @implementation IQActionSheetPickerView
 @synthesize actionSheetPickerStyle = _actionSheetPickerStyle;
 @synthesize titlesForComponenets = _titlesForComponenets;
-@synthesize dateStyle = _dateStyle;
 @synthesize widthsForComponents = _widthsForComponents;
 @synthesize isRangePickerView = _isRangePickerView;
+@synthesize dateStyle = _dateStyle;
+@synthesize date = _date;
 @synthesize delegate;
 - (id)init
 {
@@ -33,8 +31,7 @@
         [self addSubview:_actionToolbar];
 
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , 320, 0)];
-        //        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(toolbar.frame), CGRectGetWidth(toolbar.frame), 226)];
-        [_pickerView sizeToFit];
+         [_pickerView sizeToFit];
         [_pickerView setShowsSelectionIndicator:YES];
         [_pickerView setDelegate:self];
         [_pickerView setDataSource:self];
@@ -115,7 +112,7 @@
         else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
         {
             [selectedTitles addObject:[NSDateFormatter localizedStringFromDate:_datePicker.date dateStyle:_dateStyle timeStyle:NSDateFormatterNoStyle]];
-            self.date = _datePicker.date;
+            [self setDate:_datePicker.date];
         }
 
         [self.delegate actionSheetPickerView:self didSelectTitles:selectedTitles];
@@ -126,10 +123,7 @@
 -(void) setDate:(NSDate *)date
 {
     _date = date;
-    if (_date != nil)
-        _datePicker.date = _date;
-    else
-        _datePicker.date = [NSDate date];
+    if (_date != nil)   _datePicker.date = _date;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
