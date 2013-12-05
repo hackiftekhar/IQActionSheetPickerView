@@ -115,11 +115,21 @@
         else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
         {
             [selectedTitles addObject:[NSDateFormatter localizedStringFromDate:_datePicker.date dateStyle:_dateStyle timeStyle:NSDateFormatterNoStyle]];
+            self.date = _datePicker.date;
         }
 
         [self.delegate actionSheetPickerView:self didSelectTitles:selectedTitles];
     }
     [self dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+-(void) setDate:(NSDate *)date
+{
+    _date = date;
+    if (_date != nil)
+        _datePicker.date = _date;
+    else
+        _datePicker.date = [NSDate date];
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component

@@ -40,5 +40,6 @@ typedef enum IQActionSheetPickerStyle
 
 /*for IQActionSheetPickerStyleDatePicker*/
 @property(nonatomic, assign) NSDateFormatterStyle dateStyle;    //returning date string style.
+@property(nonatomic, assign) NSDate *date; //get/set date.
 
 @end
