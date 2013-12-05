@@ -7,10 +7,15 @@
 //
 
 #import "IQActionSheetPickerView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation IQActionSheetPickerView
-
-
+@synthesize actionSheetPickerStyle = _actionSheetPickerStyle;
+@synthesize titlesForComponenets = _titlesForComponenets;
+@synthesize dateStyle = _dateStyle;
+@synthesize widthsForComponents = _widthsForComponents;
+@synthesize isRangePickerView = _isRangePickerView;
+@synthesize delegate;
 - (id)init
 {
     self = [super init];
@@ -62,6 +67,21 @@
      
         default:
             break;
+    }
+}
+
+-(void)setFrame:(CGRect)frame
+{
+    //Forcing it to be static frame
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        [super setFrame:CGRectMake(0, 0, 320, 260+12)];
+        [_actionToolbar setFrame:CGRectMake(0, 0, 320, 44)];
+        [_pickerView setFrame:CGRectMake(0, 44, 320, 216)];
+    }
+    else
+    {
+        [super setFrame:frame];
     }
 }
 
@@ -169,8 +189,11 @@
     [super showInView:view];
     
     [UIView animateWithDuration:0.3 animations:^{
-        [self setBounds:view.bounds];
-        [self setFrame:CGRectMake(self.frame.origin.x, view.bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            [self setBounds:view.bounds];
+            [self setFrame:CGRectMake(self.frame.origin.x, view.bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
+        }
     }];
     
 }
