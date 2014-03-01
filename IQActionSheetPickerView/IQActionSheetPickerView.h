@@ -13,7 +13,7 @@ typedef enum IQActionSheetPickerStyle
 
 @class IQActionSheetPickerView;
 
-@protocol IQActionSheetPickerView <UIActionSheetDelegate>
+@protocol IQActionSheetPickerViewDelegate <UIActionSheetDelegate>
 
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
 
@@ -27,16 +27,21 @@ typedef enum IQActionSheetPickerStyle
     UIToolbar       *_actionToolbar;
 }
 
-@property(nonatomic,assign) id<IQActionSheetPickerView> delegate; // weak reference
+@property(nonatomic,assign) id<IQActionSheetPickerViewDelegate> delegate; // weak reference
 @property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //Default is IQActionSheetPickerStyleTextPicker;
 
 /*for IQActionSheetPickerStyleTextPicker*/
-@property(nonatomic,assign) BOOL isRangePickerView;
+@property(nonatomic, assign) BOOL isRangePickerView;
 @property(nonatomic, strong) NSArray *titlesForComponenets;
 @property(nonatomic, strong) NSArray *widthsForComponents;
-
+@property(nonatomic, strong) NSArray *selectedTitles;
+-(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated;
 /*for IQActionSheetPickerStyleDatePicker*/
 @property(nonatomic, assign) NSDateFormatterStyle dateStyle;    //returning date string style.
 @property(nonatomic, assign) NSDate *date; //get/set date.
+-(void)setDate:(NSDate *)date animated:(BOOL)animated;
+
+/*for Both picker styles*/
+-(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated;
 
 @end

@@ -7,7 +7,7 @@
 #import "IQActionSheetPickerView.h"
 
 
-@interface ViewController ()<IQActionSheetPickerView>
+@interface ViewController ()<IQActionSheetPickerViewDelegate>
 
 @end
 
