@@ -255,11 +255,12 @@
     [UIView animateWithDuration:0.3 animations:^{
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            [self setBounds:view.bounds];
-            [self setFrame:CGRectMake(self.frame.origin.x, view.bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
+            CGRect bounds = CGRectZero;
+            bounds.size = view.bounds.size;
+            [self setBounds:bounds];
+            [self setFrame:CGRectMake(CGRectGetMinX(self.frame), CGRectGetHeight(bounds)-CGRectGetHeight(_actionToolbar.bounds)-CGRectGetHeight(_pickerView.bounds), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
         }
     }];
-    
 }
 
 @end
