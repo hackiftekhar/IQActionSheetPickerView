@@ -14,6 +14,7 @@
 @synthesize dateStyle = _dateStyle;
 @synthesize date = _date;
 @synthesize delegate;
+
 - (id)init
 {
     self = [super init];
@@ -225,9 +226,14 @@
     return [[_titlesForComponenets objectAtIndex:component] count];
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    return [[_titlesForComponenets objectAtIndex:component] objectAtIndex:row];
+    UILabel *labelText = [[UILabel alloc] init];
+    labelText.font = [UIFont boldSystemFontOfSize:20.0];
+    labelText.backgroundColor = [UIColor clearColor];
+    [labelText setTextAlignment:NSTextAlignmentCenter];
+    [labelText setText:[[_titlesForComponenets objectAtIndex:component] objectAtIndex:row]];
+    return labelText;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
