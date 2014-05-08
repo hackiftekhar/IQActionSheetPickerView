@@ -27,6 +27,8 @@ typedef enum IQActionSheetPickerStyle
     UIToolbar       *_actionToolbar;
 }
 
+- (id)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+
 @property(nonatomic,assign) id<IQActionSheetPickerViewDelegate> delegate; // weak reference
 @property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //Default is IQActionSheetPickerStyleTextPicker;
 

@@ -30,9 +30,9 @@
         
         [_actionToolbar setItems:[NSArray arrayWithObjects:cancelButton,flexSpace,doneBtn, nil] animated:YES];
         [self addSubview:_actionToolbar];
-
+        
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , 320, 0)];
-         [_pickerView sizeToFit];
+        [_pickerView sizeToFit];
         [_pickerView setShowsSelectionIndicator:YES];
         [_pickerView setDelegate:self];
         [_pickerView setDataSource:self];
@@ -62,7 +62,7 @@
             [_pickerView setHidden:YES];
             [_datePicker setHidden:NO];
             break;
-     
+            
         default:
             break;
     }
@@ -93,7 +93,7 @@
     if ([self.delegate respondsToSelector:@selector(actionSheetPickerView:didSelectTitles:)])
     {
         NSMutableArray *selectedTitles = [[NSMutableArray alloc] init];
-
+        
         if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
         {
             for (NSInteger component = 0; component<_pickerView.numberOfComponents; component++)
@@ -109,7 +109,7 @@
                     [selectedTitles addObject:[NSNull null]];
                 }
             }
-
+            
             [self setSelectedTitles:selectedTitles];
         }
         else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
@@ -119,7 +119,7 @@
             
             [self setSelectedTitles:[[NSArray alloc] initWithObjects:_datePicker.date, nil]];
         }
-
+        
         [self.delegate actionSheetPickerView:self didSelectTitles:selectedTitles];
     }
     [self dismissWithClickedButtonIndex:0 animated:YES];
@@ -128,6 +128,46 @@
 -(void)setSelectedTitles:(NSArray *)selectedTitles
 {
     [self setSelectedTitles:selectedTitles animated:NO];
+}
+
+-(NSArray *)selectedTitles
+{
+    NSMutableArray *selectedTitles = [[NSMutableArray alloc] init];
+    
+    if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
+    {
+        NSUInteger totalComponent = _pickerView.numberOfComponents;
+        
+        for (NSInteger component = 0; component<totalComponent; component++)
+        {
+            NSInteger selectedRow = [_pickerView selectedRowInComponent:component];
+            
+            if (selectedRow == -1)
+            {
+                [selectedTitles addObject:[NSNull null]];
+            }
+            else
+            {
+                NSArray *items = [_titlesForComponenets objectAtIndex:component];
+                
+                if ([items count] > selectedRow)
+                {
+                    id selectTitle = [items objectAtIndex:selectedRow];
+                    [selectedTitles addObject:selectTitle];
+                }
+                else
+                {
+                    [selectedTitles addObject:[NSNull null]];
+                }
+            }
+        }
+    }
+    else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
+    {
+        [selectedTitles addObject:_datePicker.date];
+    }
+    
+    return selectedTitles;
 }
 
 -(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated
@@ -196,7 +236,7 @@
         if ([[_widthsForComponents objectAtIndex:component] isKindOfClass:[NSNumber class]])
         {
             CGFloat width = [[_widthsForComponents objectAtIndex:component] floatValue];
-
+            
             //If width is 0, then calculating it's size.
             if (width == 0)
                 return ((pickerView.bounds.size.width-20)-2*(_titlesForComponenets.count-1))/_titlesForComponenets.count;
@@ -261,6 +301,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
+            //Fix for UITableViewController
             CGRect bounds = CGRectZero;
             bounds.size = view.bounds.size;
             [self setBounds:bounds];
