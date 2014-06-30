@@ -208,7 +208,7 @@
             NSArray *items = [_titlesForComponenets objectAtIndex:component];
             NSUInteger selectIndex = [[indexes objectAtIndex:component] unsignedIntegerValue];
             
-            if (items.count < selectIndex)
+            if (selectIndex < items.count)
             {
                 [_pickerView selectRow:selectIndex inComponent:component animated:animated];
             }
