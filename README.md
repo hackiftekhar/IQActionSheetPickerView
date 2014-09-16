@@ -4,7 +4,7 @@ IQActionSheetPickerView
 ActionSheet with UIPickerView
 
 ## Screen Shot
-[![IQActionSheetPickerView](.IQActionSheetPickerView.png)]
+[![IQActionSheetPickerView](IQActionSheetPickerView.png)]
 
 
 LICENSE
