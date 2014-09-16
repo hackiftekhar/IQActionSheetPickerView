@@ -32,7 +32,7 @@ typedef enum IQActionSheetPickerStyle
 
 @class IQActionSheetPickerView;
 
-@protocol IQActionSheetPickerViewDelegate <UIActionSheetDelegate>
+@protocol IQActionSheetPickerViewDelegate <NSObject>
 
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
 
@@ -51,7 +51,7 @@ typedef enum IQActionSheetPickerStyle
 -(void)showInViewController:(UIViewController*)controller;
 -(void)dismiss;
 
-@property(nonatomic,assign) id<IQActionSheetPickerViewDelegate> delegate; // weak reference
+@property(nonatomic, weak) id<IQActionSheetPickerViewDelegate> delegate; // weak reference
 @property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //Default is IQActionSheetPickerStyleTextPicker;
 
 /*for IQActionSheetPickerStyleTextPicker*/
