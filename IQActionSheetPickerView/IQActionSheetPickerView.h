@@ -36,6 +36,8 @@ typedef enum IQActionSheetPickerStyle
 
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
 
+@optional
+- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didChangeRow:(NSInteger)row inComponent:(NSInteger)component;
 @end
 
 @interface IQActionSheetPickerView : UIView <UIPickerViewDataSource,UIPickerViewDelegate>
@@ -60,6 +62,8 @@ typedef enum IQActionSheetPickerStyle
 @property(nonatomic, strong) NSArray *widthsForComponents;
 @property(nonatomic, strong) NSArray *selectedTitles;
 -(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated;
+-(void)reloadComponent:(NSInteger)component;
+-(void)reloadAllComponents;
 /*for IQActionSheetPickerStyleDatePicker*/
 @property(nonatomic, assign) NSDateFormatterStyle dateStyle;    //returning date string style.
 @property(nonatomic, assign) NSDate *date; //get/set date.
