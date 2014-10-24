@@ -282,6 +282,16 @@
     }
 }
 
+-(void)reloadComponent:(NSInteger)component
+{
+    [_pickerView reloadComponent:component];
+}
+
+-(void)reloadAllComponents
+{
+    [_pickerView reloadAllComponents];
+}
+
 -(void) setDate:(NSDate *)date
 {
     [self setDate:date animated:NO];
@@ -344,6 +354,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    if ([self.delegate respondsToSelector:@selector(actionSheetPickerView:didChangeRow:inComponent:)]) {
+        [self.delegate actionSheetPickerView:self didChangeRow:row inComponent:component];
+    }
     if (_isRangePickerView && pickerView.numberOfComponents == 3)
     {
         if (component == 0)
