@@ -24,48 +24,164 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum IQActionSheetPickerStyle
-{
+
+/*!
+    @enum IQActionSheetPickerStyle
+ 
+    @abstract Action Sheet style settings.
+ 
+    @const IQActionSheetPickerStyleTextPicker   Show pickerView with provided text data.
+ 
+    @const IQActionSheetPickerStyleDatePicker   Show UIDatePicker.
+ */
+
+typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
+    
     IQActionSheetPickerStyleTextPicker,
-    IQActionSheetPickerStyleDatePicker
-}IQActionSheetPickerStyle;
+    
+    IQActionSheetPickerStyleDatePicker,
+    
+};
 
 @class IQActionSheetPickerView;
 
+/*!
+    @protocol   IQActionSheetPickerViewDelegate
+ 
+    @abstract   ActionSheetPickerView delegate.
+ */
 @protocol IQActionSheetPickerViewDelegate <NSObject>
 
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
 
 @end
 
-@interface IQActionSheetPickerView : UIView <UIPickerViewDataSource,UIPickerViewDelegate>
-{
-@private
-    UIPickerView    *_pickerView;
-    UIDatePicker    *_datePicker;
-    UIToolbar       *_actionToolbar;
-}
+/*!
+    @author     Iftekhar Qurashi
+ 
+	@related    hack.iftekhar@gmail.com
+ 
+    @class      IQActionSheetPickerView
+ 
+	@abstract   ActionSheet style UIPickerView
+ */
+@interface IQActionSheetPickerView : UIView
 
-- (id)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate;
+/*!
+    @method     initWithTitle:delegate
+ 
+    @abstract   Initialization method with a title for toolbar and a callback delegate
+ */
+- (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
--(void)showInViewController:(UIViewController*)controller;
+/*!
+    @method     show
+
+    @method     showWithCompletion:
+ 
+    @abstract   Show picker view with slide up animation, completion block will be called on animation completion.
+ */
+-(void)show;
+-(void)showWithCompletion:(void (^)(void))completion;
+
+/*!
+    @method     dismiss
+ 
+    @method     dismissWithCompletion:
+ 
+    @abstract   Dismiss picker view with slide down animation, completion block will be called on animation completion.
+ */
 -(void)dismiss;
+-(void)dismissWithCompletion:(void (^)(void))completion;
 
-@property(nonatomic, weak) id<IQActionSheetPickerViewDelegate> delegate; // weak reference
-@property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //Default is IQActionSheetPickerStyleTextPicker;
+/*!
+    @property   delegate
+ 
+    @abstract   delegate(weak reference) object to inform about the selected values in pickerView. Delegate method will be called on Done click.
+ */
+@property(nonatomic, weak) id<IQActionSheetPickerViewDelegate> delegate;
 
-/*for IQActionSheetPickerStyleTextPicker*/
-@property(nonatomic, assign) BOOL isRangePickerView;
-@property(nonatomic, strong) NSArray *titlesForComponenets;
-@property(nonatomic, strong) NSArray *widthsForComponents;
+/*!
+    @property   actionSheetPickerStyle
+ 
+    @abstract   actionSheetPickerStyle to show in picker. Default is IQActionSheetPickerStyleTextPicker.
+ */
+@property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //
+
+
+
+
+/*******************************************/
+
+
+//  Title Selection
+
+/*!
+    @property   selectedTitles
+ 
+    @abstract   selected titles for each component. Please use [ NSArray of NSString ] format for IQActionSheetPickerStyleTextPicker style, and [ NSArray of NSDate ] format for IQActionSheetPickerStyleDatePicker. (Not Animated)
+ */
 @property(nonatomic, strong) NSArray *selectedTitles;
--(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated;
-/*for IQActionSheetPickerStyleDatePicker*/
-@property(nonatomic, assign) NSDateFormatterStyle dateStyle;    //returning date string style.
-@property(nonatomic, assign) NSDate *date; //get/set date.
--(void)setDate:(NSDate *)date animated:(BOOL)animated;
 
-/*for Both picker styles*/
+/*!
+    @method     setSelectedTitles:animated
+ 
+    @abstract   set selected titles for each component. Please use [ NSArray of NSString ] format for IQActionSheetPickerStyleTextPicker style, and [ NSArray of NSDate ] format for IQActionSheetPickerStyleDatePicker.
+ */
 -(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated;
 
+
+/*-------------------------------------------------------*/
+/******     IQActionSheetPickerStyleTextPicker      ******/
+/*-------------------------------------------------------*/
+
+/*!
+    @property   titlesForComponenets
+ 
+    @abstract   Titles to show for component. Please use [ NSArray(numberOfComponents) of [ NSArray of NSString ](RowValueForEachComponent)] format, even there is single row to show, For example.
+            @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
+ */
+@property(nonatomic, strong) NSArray *titlesForComponenets;
+
+/*!
+    @property   widthsForComponents
+ 
+    @abstract   Width to adopt for each component. Please use [NSArray of NSNumber/NSNull] format. If you don't want to specify a row width then use NSNull to calculate row width automatically.
+ */
+@property(nonatomic, strong) NSArray *widthsForComponents;
+
+/*!
+    @method     selectIndexes:animated
+ 
+    @abstract   Select the provided index row for each component. Please use [ NSArray of NSNumber ] format for indexes. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.
+ */
+-(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated;
+
+/*!
+    @property   isRangePickerView
+ 
+    @abstract   If YES then it will force to scroll third picker component to pick equal or larger row then the first.
+ */
+@property(nonatomic, assign) BOOL isRangePickerView;
+
+/*-------------------------------------------------------*/
+/******     IQActionSheetPickerStyleDatePicker      ******/
+/*-------------------------------------------------------*/
+
+/*!
+    @property   date
+ 
+    @abstract   selected date. Can also be use as setter method (not animated).
+ */
+@property(nonatomic, assign) NSDate *date; //get/set date.
+
+/*!
+    @method     setDate:animated
+ 
+    @abstract   set selected date.
+ */
+-(void)setDate:(NSDate *)date animated:(BOOL)animated;
+
+
 @end
+

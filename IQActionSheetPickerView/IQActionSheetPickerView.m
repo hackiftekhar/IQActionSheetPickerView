@@ -26,25 +26,28 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
 
-@interface IQActionSheetPickerView ()
+@interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
-    UILabel     *_titleLabel;
-    IQActionSheetViewController *actionSheetController;
+    UIPickerView    *_pickerView;
+    UIDatePicker    *_datePicker;
+    UIToolbar       *_actionToolbar;
+    UILabel         *_titleLabel;
+
+    IQActionSheetViewController *_actionSheetController;
 }
 
 @end
 
 @implementation IQActionSheetPickerView
 
-@synthesize actionSheetPickerStyle = _actionSheetPickerStyle;
-@synthesize titlesForComponenets = _titlesForComponenets;
-@synthesize widthsForComponents = _widthsForComponents;
-@synthesize isRangePickerView = _isRangePickerView;
-@synthesize dateStyle = _dateStyle;
-@synthesize date = _date;
-@synthesize delegate = _delegate;
+@synthesize actionSheetPickerStyle  = _actionSheetPickerStyle;
+@synthesize titlesForComponenets    = _titlesForComponenets;
+@synthesize widthsForComponents     = _widthsForComponents;
+@synthesize isRangePickerView       = _isRangePickerView;
+@synthesize delegate                = _delegate;
+@synthesize date                    = _date;
 
-- (id)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
+- (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
 {
     self = [super init];
 
@@ -106,8 +109,6 @@
             _datePicker.frame = _pickerView.frame;
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
             [self addSubview:_datePicker];
-            [self setDateStyle:NSDateFormatterMediumStyle];
-            
         }
         
         //Initial settings
@@ -166,7 +167,7 @@
                 
                 if (row!= -1)
                 {
-                    [selectedTitles addObject:[[_titlesForComponenets objectAtIndex:component] objectAtIndex:row]];
+                    [selectedTitles addObject:_titlesForComponenets[component][row]];
                 }
                 else
                 {
@@ -178,10 +179,10 @@
         }
         else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
         {
-            [selectedTitles addObject:[NSDateFormatter localizedStringFromDate:_datePicker.date dateStyle:_dateStyle timeStyle:NSDateFormatterNoStyle]];
+            [selectedTitles addObject:_datePicker.date];
             [self setDate:_datePicker.date];
             
-            [self setSelectedTitles:[[NSArray alloc] initWithObjects:_datePicker.date, nil]];
+            [self setSelectedTitles:@[_datePicker.date]];
         }
         
         [self.delegate actionSheetPickerView:self didSelectTitles:selectedTitles];
@@ -213,11 +214,11 @@
             }
             else
             {
-                NSArray *items = [_titlesForComponenets objectAtIndex:component];
+                NSArray *items = _titlesForComponenets[component];
                 
                 if ([items count] > selectedRow)
                 {
-                    id selectTitle = [items objectAtIndex:selectedRow];
+                    id selectTitle = items[selectedRow];
                     [selectedTitles addObject:selectTitle];
                 }
                 else
@@ -243,8 +244,8 @@
         
         for (NSInteger component = 0; component<totalComponent; component++)
         {
-            NSArray *items = [_titlesForComponenets objectAtIndex:component];
-            id selectTitle = [selectedTitles objectAtIndex:component];
+            NSArray *items = _titlesForComponenets[component];
+            id selectTitle = selectedTitles[component];
             
             if ([items containsObject:selectTitle])
             {
@@ -270,8 +271,8 @@
         
         for (NSInteger component = 0; component<totalComponent; component++)
         {
-            NSArray *items = [_titlesForComponenets objectAtIndex:component];
-            NSUInteger selectIndex = [[indexes objectAtIndex:component] unsignedIntegerValue];
+            NSArray *items = _titlesForComponenets[component];
+            NSUInteger selectIndex = [indexes[component] unsignedIntegerValue];
             
             if (selectIndex < items.count)
             {
@@ -298,9 +299,9 @@
     if (_widthsForComponents)
     {
         //If object isKind of NSNumber class
-        if ([[_widthsForComponents objectAtIndex:component] isKindOfClass:[NSNumber class]])
+        if ([_widthsForComponents[component] isKindOfClass:[NSNumber class]])
         {
-            CGFloat width = [[_widthsForComponents objectAtIndex:component] floatValue];
+            CGFloat width = [_widthsForComponents[component] floatValue];
             
             //If width is 0, then calculating it's size.
             if (width == 0)
@@ -328,7 +329,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[_titlesForComponenets objectAtIndex:component] count];
+    return [_titlesForComponenets[component] count];
 }
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
@@ -337,7 +338,7 @@
     labelText.font = [UIFont boldSystemFontOfSize:20.0];
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];
-    [labelText setText:[[_titlesForComponenets objectAtIndex:component] objectAtIndex:row]];
+    [labelText setText:_titlesForComponenets[component][row]];
     return labelText;
 }
 
@@ -358,7 +359,12 @@
 
 -(void)dismiss
 {
-    [actionSheetController dismiss];
+    [_actionSheetController dismissWithCompletion:nil];
+}
+
+-(void)dismissWithCompletion:(void (^)(void))completion
+{
+    [_actionSheetController dismissWithCompletion:completion];
 }
 
 -(void)dealloc
@@ -366,12 +372,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)showInViewController:(UIViewController*)controller
+-(void)show
+{
+    [self showWithCompletion:nil];
+}
+
+-(void)showWithCompletion:(void (^)(void))completion
 {
     [_pickerView reloadAllComponents];
-
-    actionSheetController = [[IQActionSheetViewController alloc] init];
-    [actionSheetController showPickerView:self inViewController:controller];
+    
+    _actionSheetController = [[IQActionSheetViewController alloc] init];
+    [_actionSheetController showPickerView:self completion:completion];
+    
 }
 
 @end
