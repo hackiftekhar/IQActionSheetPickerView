@@ -166,6 +166,20 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 @property(nonatomic, assign) BOOL isRangePickerView;
 
+/*!
+    @property   reloadComponent:
+ 
+    @abstract   Reload a component in pickerView.
+ */
+-(void)reloadComponent:(NSInteger)component;
+
+/*!
+    @property   reloadAllComponents
+ 
+    @abstract   Reload all components in pickerView.
+ */
+-(void)reloadAllComponents;
+
 /*-------------------------------------------------------*/
 /******     IQActionSheetPickerStyleDatePicker      ******/
 /*-------------------------------------------------------*/
