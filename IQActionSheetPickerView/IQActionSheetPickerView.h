@@ -76,6 +76,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
+
+
+
+/*******************************************/
+
+
 /*!
     @method     show
 
@@ -95,6 +101,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 -(void)dismiss;
 -(void)dismissWithCompletion:(void (^)(void))completion;
+
+
+
+
+/*******************************************/
+
 
 /*!
     @property   delegate
@@ -141,7 +153,7 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
     @property   titlesForComponenets
  
     @abstract   Titles to show for component. Please use [ NSArray(numberOfComponents) of [ NSArray of NSString ](RowValueForEachComponent)] format, even there is single row to show, For example.
-            @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
+                @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
  */
 @property(nonatomic, strong) NSArray *titlesForComponenets;
 
@@ -198,6 +210,19 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 -(void)setDate:(NSDate *)date animated:(BOOL)animated;
 
+/*!
+    @property   minimumDate
+ 
+    @abstract   Minimum selectable date in UIDatePicker. Default is nil.
+ */
+@property (nonatomic, retain) NSDate *minimumDate;
+
+/*!
+    @property   maximumDate
+ 
+    @abstract   Maximum selectable date in UIDatePicker. Default is nil.
+ */
+@property (nonatomic, retain) NSDate *maximumDate;
 
 @end
 

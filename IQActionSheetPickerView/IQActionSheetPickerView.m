@@ -303,6 +303,20 @@
     if (_date != nil)   [_datePicker setDate:_date animated:animated];
 }
 
+-(void)setMinimumDate:(NSDate *)minimumDate
+{
+    _minimumDate = minimumDate;
+    
+    _datePicker.minimumDate = minimumDate;
+}
+
+-(void)setMaximumDate:(NSDate *)maximumDate
+{
+    _maximumDate = maximumDate;
+    
+    _datePicker.maximumDate = maximumDate;
+}
+
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     //If having widths
