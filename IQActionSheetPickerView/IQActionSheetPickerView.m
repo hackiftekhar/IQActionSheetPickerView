@@ -106,6 +106,7 @@
         //UIDatePicker
         {
             _datePicker = [[UIDatePicker alloc] initWithFrame:_pickerView.frame];
+            [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
             _datePicker.frame = _pickerView.frame;
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
             [self addSubview:_datePicker];
@@ -189,6 +190,11 @@
     }
     
     [self dismiss];
+}
+
+-(void)dateChanged:(UIDatePicker*)datePicker
+{
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 -(void)setSelectedTitles:(NSArray *)selectedTitles
@@ -368,9 +374,12 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+
     if ([self.delegate respondsToSelector:@selector(actionSheetPickerView:didChangeRow:inComponent:)]) {
         [self.delegate actionSheetPickerView:self didChangeRow:row inComponent:component];
     }
+    
     if (_isRangePickerView && pickerView.numberOfComponents == 3)
     {
         if (component == 0)
