@@ -23,7 +23,40 @@
         case 3: [buttonTriple setTitle:[titles componentsJoinedByString:@" - "] forState:UIControlStateNormal]; break;
         case 4: [buttonRange setTitle:[titles componentsJoinedByString:@" - "] forState:UIControlStateNormal]; break;
         case 5: [buttonTripleSize setTitle:[titles componentsJoinedByString:@" - "] forState:UIControlStateNormal]; break;
-        case 6: [buttonDate setTitle:[titles componentsJoinedByString:@" - "] forState:UIControlStateNormal]; break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date
+{
+    switch (pickerView.tag)
+    {
+        case 6:
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            [formatter setTimeStyle:NSDateFormatterNoStyle];
+            [buttonDate setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+        }
+            break;
+        case 7:
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            [formatter setTimeStyle:NSDateFormatterShortStyle];
+            [buttonDateTime setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+        }
+            break;
+        case 8:
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateStyle:NSDateFormatterNoStyle];
+            [formatter setTimeStyle:NSDateFormatterShortStyle];
+            [buttonTime setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+        }
+            break;
             
         default:
             break;
@@ -86,6 +119,21 @@
     [picker show];
 }
 
+- (IBAction)dateTimePickerViewClicked:(UIButton *)sender
+{
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Date/Time Picker" delegate:self];
+    [picker setTag:7];
+    [picker setActionSheetPickerStyle:IQActionSheetPickerStyleDateTimePicker];
+    [picker show];
+}
+
+- (IBAction)timePickerViewClicked:(UIButton *)sender
+{
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Time Picker" delegate:self];
+    [picker setTag:8];
+    [picker setActionSheetPickerStyle:IQActionSheetPickerStyleTimePicker];
+    [picker show];
+}
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {

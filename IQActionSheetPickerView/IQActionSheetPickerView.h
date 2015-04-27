@@ -43,6 +43,9 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
     
     IQActionSheetPickerStyleDatePicker,
     
+    IQActionSheetPickerStyleDateTimePicker,
+    
+    IQActionSheetPickerStyleTimePicker,
 };
 
 @class IQActionSheetPickerView;
@@ -52,9 +55,9 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 @protocol IQActionSheetPickerViewDelegate <NSObject>
 
-- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
-
 @optional
+- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
+- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate*)date;
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didChangeRow:(NSInteger)row inComponent:(NSInteger)component;
 @end
 
@@ -104,24 +107,19 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 -(void)dismissWithCompletion:(void (^)(void))completion;
 
 
-///----------------------
-/// @name Title Selection
-///----------------------
+///-----------------------------------------
+/// @name IQActionSheetPickerStyleTextPicker
+///-----------------------------------------
 
 /*!
- selected titles for each component. Please use [ NSArray of NSString ] format for IQActionSheetPickerStyleTextPicker style, and [ NSArray of NSDate ] format for IQActionSheetPickerStyleDatePicker. (Not Animated)
+ selected titles for each component. Please use [ NSArray of NSString ] format. (Not Animated)
  */
 @property(nonatomic, strong) NSArray *selectedTitles;
 
 /*!
- set selected titles for each component. Please use [ NSArray of NSString ] format for IQActionSheetPickerStyleTextPicker style, and [ NSArray of NSDate ] format for IQActionSheetPickerStyleDatePicker.
+ set selected titles for each component. Please use [ NSArray of NSString ] format.
  */
 -(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated;
-
-
-///-----------------------------------------
-/// @name IQActionSheetPickerStyleTextPicker
-///-----------------------------------------
 
 /*!
  Titles to show for component. Please use [ NSArray(numberOfComponents) of [ NSArray of NSString ](RowValueForEachComponent)] format, even there is single row to show, For example.
@@ -155,9 +153,9 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 -(void)reloadAllComponents;
 
 
-///-----------------------------------------
-/// @name IQActionSheetPickerStyleDatePicker
-///-----------------------------------------
+///-------------------------------------------------------------------------------------------------------------------
+/// @name IQActionSheetPickerStyleDatePicker/IQActionSheetPickerStyleDateTimePicker/IQActionSheetPickerStyleTimePicker
+///-------------------------------------------------------------------------------------------------------------------
 
 /*!
  selected date. Can also be use as setter method (not animated).

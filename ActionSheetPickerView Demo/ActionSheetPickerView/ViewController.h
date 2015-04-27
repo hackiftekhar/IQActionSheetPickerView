@@ -13,6 +13,8 @@
     IBOutlet UIButton *buttonTripleSize;
     IBOutlet UIButton *buttonRange;
     IBOutlet UIButton *buttonDate;
+    IBOutlet UIButton *buttonDateTime;
+    IBOutlet UIButton *buttonTime;
 
 }
 
