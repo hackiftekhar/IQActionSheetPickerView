@@ -74,6 +74,11 @@
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
             [items addObject:cancelButton];
             
+            //  Create a fake button to maintain flexibleSpace between cancelButton and titleLabel.(Otherwise the titleLabel will lean to the left）
+            UIBarButtonItem *leftNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+            [items addObject:leftNilButton];
+            
+            //  Create a title label to show on toolBar for the title you need.
             _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _actionToolbar.frame.size.width-66-57.0-16, 44)];
             _titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
             [_titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -83,11 +88,12 @@
             
             UIBarButtonItem *titlebutton = [[UIBarButtonItem alloc] initWithCustomView:_titleLabel];
             titlebutton.enabled = NO;
+            [items addObject:titlebutton];
             
             
             //  Create a fake button to maintain flexibleSpace between doneButton and nilButton. (Actually it moves done button to right side.
-            UIBarButtonItem *nilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            [items addObject:nilButton];
+            UIBarButtonItem *rightNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+            [items addObject:rightNilButton];
             
             //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
             UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
@@ -163,6 +169,26 @@
         default:
             break;
     }
+}
+
+/**
+ *  Set Action Bar Color
+ *
+ *  @param barColor Custom color for toolBar
+ */
+-(void)setBarColor:(UIColor *)barColor{
+    
+    [_actionToolbar setBarTintColor:barColor];
+}
+
+/**
+ *  Set Action Tool Bar Button Color
+ *
+ *  @param buttonColor Custom color for toolBar button
+ */
+-(void)setButtonColor:(UIColor *)buttonColor{
+    
+    [_actionToolbar setTintColor:buttonColor];
 }
 
 #pragma mark - Done/Cancel
