@@ -81,6 +81,15 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 @property(nonatomic, assign) IQActionSheetPickerStyle actionSheetPickerStyle;   //
 
+/*!
+ Color for toolBar
+ */
+@property(nonatomic, strong) UIColor *barColor;
+/*!
+ Color for buttons
+ */
+@property(nonatomic, strong) UIColor *buttonColor;
+
 ///----------------------
 /// @name Show / Hide
 ///----------------------
