@@ -59,6 +59,8 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray*)titles;
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate*)date;
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didChangeRow:(NSInteger)row inComponent:(NSInteger)component;
+- (void)actionSheetPickerViewDidCancel:(IQActionSheetPickerView *)pickerView;
+- (void)actionSheetPickerViewWillCancel:(IQActionSheetPickerView *)pickerView;
 @end
 
 /*!

@@ -61,7 +61,7 @@
         //UIToolbar
         {
             _actionToolbar = [[UIToolbar alloc] init];
-            _actionToolbar.barStyle = UIBarStyleBlackTranslucent;
+            _actionToolbar.barStyle = UIBarStyleDefault;
             [_actionToolbar sizeToFit];
             
             CGRect toolbarFrame = _actionToolbar.frame;
@@ -108,6 +108,7 @@
         //UIPickerView
         {
             _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , CGRectGetWidth(_actionToolbar.frame), 216)];
+            _pickerView.backgroundColor = [UIColor whiteColor];
             [_pickerView setShowsSelectionIndicator:YES];
             [_pickerView setDelegate:self];
             [_pickerView setDataSource:self];
@@ -195,7 +196,18 @@
 
 -(void)pickerCancelClicked:(UIBarButtonItem*)barButton
 {
-    [self dismiss];
+    if ([self.delegate respondsToSelector:@selector(actionSheetPickerViewWillCancel:)])
+    {
+        [self.delegate actionSheetPickerViewWillCancel:self];
+    }
+    
+    [self dismissWithCompletion:^{
+        
+        if ([self.delegate respondsToSelector:@selector(actionSheetPickerViewDidCancel:)])
+        {
+            [self.delegate actionSheetPickerViewDidCancel:self];
+        }
+    }];
 }
 
 -(void)pickerDoneClicked:(UIBarButtonItem*)barButton
