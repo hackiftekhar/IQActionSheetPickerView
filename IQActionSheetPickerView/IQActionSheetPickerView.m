@@ -54,7 +54,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
 {
-    self = [super init];
+    self = [super initWithFrame:CGRectZero];
 
     if (self)
     {

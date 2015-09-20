@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 /*!
  Initialization method with a title for toolbar and a callback delegate
  */
-- (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate;
 
 /*!
  delegate(weak reference) object to inform about the selected values in pickerView. Delegate method will be called on Done click.
