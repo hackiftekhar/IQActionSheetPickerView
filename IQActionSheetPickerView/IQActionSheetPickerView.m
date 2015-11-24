@@ -433,7 +433,11 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *labelText = [[UILabel alloc] init];
-    labelText.font = [UIFont boldSystemFontOfSize:20.0];
+    if(self.pickerFont == nil){
+        labelText.font = [UIFont boldSystemFontOfSize:20.0];
+    }else{
+        labelText.font = self.pickerFont;
+    }
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];
     [labelText setText:_titlesForComponenets[component][row]];
