@@ -66,6 +66,7 @@
 - (IBAction)onePickerViewClicked:(UIButton *)sender
 {
      IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Single Picker" delegate:self];
+    picker.pickerFont = [UIFont systemFontOfSize:12];
     [picker setTag:1];
     [picker setTitlesForComponents:@[@[@"First", @"Second", @"Third", @"Four", @"Five"]]];
     [picker show];

@@ -92,6 +92,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  */
 @property(nonatomic, strong) UIColor *buttonColor;
 
+/*!
+ Font for the UIPickerView
+ */
+@property(nonatomic, strong) UIFont *pickerFont;
+
+
 ///----------------------
 /// @name Show / Hide
 ///----------------------
