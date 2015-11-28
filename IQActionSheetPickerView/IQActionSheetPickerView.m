@@ -41,7 +41,7 @@
 @implementation IQActionSheetPickerView
 
 @synthesize actionSheetPickerStyle  = _actionSheetPickerStyle;
-@synthesize titlesForComponenets    = _titlesForComponenets;
+@synthesize titlesForComponents     = _titlesForComponents;
 @synthesize widthsForComponents     = _widthsForComponents;
 @synthesize isRangePickerView       = _isRangePickerView;
 @synthesize delegate                = _delegate;
@@ -224,7 +224,7 @@
                 
                 if (row!= -1)
                 {
-                    [selectedTitles addObject:_titlesForComponenets[component][row]];
+                    [selectedTitles addObject:_titlesForComponents[component][row]];
                 }
                 else
                 {
@@ -329,7 +329,7 @@
             }
             else
             {
-                NSArray *items = _titlesForComponenets[component];
+                NSArray *items = _titlesForComponents[component];
                 
                 if ([items count] > selectedRow)
                 {
@@ -359,7 +359,7 @@
         
         for (NSInteger component = 0; component<totalComponent; component++)
         {
-            NSArray *items = _titlesForComponenets[component];
+            NSArray *items = _titlesForComponents[component];
             id selectTitle = selectedTitles[component];
             
             if ([items containsObject:selectTitle])
@@ -379,7 +379,7 @@
         
         for (NSInteger component = 0; component<totalComponent; component++)
         {
-            NSArray *items = _titlesForComponenets[component];
+            NSArray *items = _titlesForComponents[component];
             NSUInteger selectIndex = [indexes[component] unsignedIntegerValue];
             
             if (selectIndex < items.count)
@@ -404,30 +404,30 @@
             
             //If width is 0, then calculating it's size.
             if (width == 0)
-                return ((pickerView.bounds.size.width-20)-2*(_titlesForComponenets.count-1))/_titlesForComponenets.count;
+                return ((pickerView.bounds.size.width-20)-2*(_titlesForComponents.count-1))/_titlesForComponents.count;
             //Else returning it's width.
             else
                 return width;
         }
         //Else calculating it's size.
         else
-            return ((pickerView.bounds.size.width-20)-2*(_titlesForComponenets.count-1))/_titlesForComponenets.count;
+            return ((pickerView.bounds.size.width-20)-2*(_titlesForComponents.count-1))/_titlesForComponents.count;
     }
     //Else calculating it's size.
     else
     {
-        return ((pickerView.bounds.size.width-20)-2*(_titlesForComponenets.count-1))/_titlesForComponenets.count;
+        return ((pickerView.bounds.size.width-20)-2*(_titlesForComponents.count-1))/_titlesForComponents.count;
     }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return [_titlesForComponenets count];
+    return [_titlesForComponents count];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [_titlesForComponenets[component] count];
+    return [_titlesForComponents[component] count];
 }
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
@@ -436,7 +436,7 @@
     labelText.font = [UIFont boldSystemFontOfSize:20.0];
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];
-    [labelText setText:_titlesForComponenets[component][row]];
+    [labelText setText:_titlesForComponents[component][row]];
     return labelText;
 }
 

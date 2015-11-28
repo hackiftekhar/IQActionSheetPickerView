@@ -67,14 +67,14 @@
 {
      IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Single Picker" delegate:self];
     [picker setTag:1];
-    [picker setTitlesForComponenets:@[@[@"First", @"Second", @"Third", @"Four", @"Five"]]];
+    [picker setTitlesForComponents:@[@[@"First", @"Second", @"Third", @"Four", @"Five"]]];
     [picker show];
 }
 
 - (IBAction)twoPickerViewClicked:(UIButton *)sender {
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Double Picker" delegate:self];
     [picker setTag:2];
-    [picker setTitlesForComponenets:@[@[@"First 1", @"Second 1", @"Third 1", @"Four 1", @"Five 1"],
+    [picker setTitlesForComponents:@[@[@"First 1", @"Second 1", @"Third 1", @"Four 1", @"Five 1"],
                                      @[@"First 2", @"Second 2", @"Third 2", @"Four 2", @"Five 2"]]];
     [picker show];
 }
@@ -82,7 +82,7 @@
 - (IBAction)threePickerViewClicked:(UIButton *)sender {
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Three Picker" delegate:self];
     [picker setTag:3];
-    [picker setTitlesForComponenets:@[@[@"First 1", @"Second 1", @"Third 1", @"Four 1", @"Five 1"],
+    [picker setTitlesForComponents:@[@[@"First 1", @"Second 1", @"Third 1", @"Four 1", @"Five 1"],
                                      @[@"First 2", @"Second 2", @"Third 2", @"Four 2", @"Five 2"],
                                      @[@"First 3", @"Second 3", @"Third 3", @"Four 3", @"Five 3"]]];
     [picker show];
@@ -92,7 +92,7 @@
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Range Selector" delegate:self];
     [picker setTag:4];
     [picker setIsRangePickerView:YES];
-    [picker setTitlesForComponenets:@[@[@"100", @"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900"],
+    [picker setTitlesForComponents:@[@[@"100", @"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900"],
                                      @[@"To"],
                                      @[@"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900",@"1000"]]];
     [picker show];
@@ -102,7 +102,7 @@
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Range Selector With Size" delegate:self];
     [picker setTag:5];
     [picker setIsRangePickerView:YES];
-    [picker setTitlesForComponenets:@[@[@"100", @"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900"],
+    [picker setTitlesForComponents:@[@[@"100", @"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900"],
                                      @[@"To"],
                                      @[@"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900",@"1000"]]];
     [picker setWidthsForComponents:@[@120.0f,

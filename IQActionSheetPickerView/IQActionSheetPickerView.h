@@ -136,7 +136,7 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  Titles to show for component. Please use [ NSArray(numberOfComponents) of [ NSArray of NSString ](RowValueForEachComponent)] format, even there is single row to show, For example.
                 @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
  */
-@property(nonatomic, strong) NSArray *titlesForComponenets;
+@property(nonatomic, strong) NSArray *titlesForComponents;
 
 /*!
  Width to adopt for each component. Please use [NSArray of NSNumber/NSNull] format. If you don't want to specify a row width then use NSNull to calculate row width automatically.
