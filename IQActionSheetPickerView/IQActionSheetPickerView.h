@@ -86,16 +86,11 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 /*!
  Color for toolBar
  */
-@property(nonatomic, strong) UIColor *barColor;
+@property(nonatomic, strong) UIColor *toolbarTintColor;
 /*!
  Color for buttons
  */
-@property(nonatomic, strong) UIColor *buttonColor;
-
-/*!
- Font for the UIPickerView
- */
-@property(nonatomic, strong) UIFont *pickerFont;
+@property(nonatomic, strong) UIColor *toolbarButtonColor;
 
 
 ///----------------------
@@ -148,6 +143,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  Width to adopt for each component. Please use [NSArray of NSNumber/NSNull] format. If you don't want to specify a row width then use NSNull to calculate row width automatically.
  */
 @property(nonatomic, strong) NSArray *widthsForComponents;
+
+/*!
+ Font for the UIPickerView
+ */
+@property(nonatomic, strong) UIFont *titleFont;
+
 
 /*!
  Select the provided index row for each component. Please use [ NSArray of NSNumber ] format for indexes. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.

@@ -177,7 +177,7 @@
  *
  *  @param barColor Custom color for toolBar
  */
--(void)setBarColor:(UIColor *)barColor{
+-(void)setToolbarTintColor:(UIColor *)barColor{
     
     [_actionToolbar setBarTintColor:barColor];
 }
@@ -187,7 +187,7 @@
  *
  *  @param buttonColor Custom color for toolBar button
  */
--(void)setButtonColor:(UIColor *)buttonColor{
+-(void)setToolbarButtonColor:(UIColor *)buttonColor{
     
     [_actionToolbar setTintColor:buttonColor];
 }
@@ -433,7 +433,7 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *labelText = [[UILabel alloc] init];
-    if(self.pickerFont == nil){
+    if(self.titleFont == nil){
         labelText.font = [UIFont boldSystemFontOfSize:20.0];
     }else{
         labelText.font = self.pickerFont;
