@@ -436,7 +436,7 @@
     if(self.titleFont == nil){
         labelText.font = [UIFont boldSystemFontOfSize:20.0];
     }else{
-        labelText.font = self.pickerFont;
+        labelText.font = self.titleFont;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];
