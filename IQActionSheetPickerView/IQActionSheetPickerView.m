@@ -87,7 +87,7 @@
             [_titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             
             UIBarButtonItem *titlebutton = [[UIBarButtonItem alloc] initWithCustomView:_titleLabel];
-            titlebutton.enabled = NO;
+//            titlebutton.enabled = NO;
             [items addObject:titlebutton];
             
             
@@ -190,6 +190,22 @@
 -(void)setToolbarButtonColor:(UIColor *)buttonColor{
     
     [_actionToolbar setTintColor:buttonColor];
+}
+
+/*!
+ Font for the UIPickerView
+ */
+- (void)setTitleFont:(UIFont *)titleFont {
+    
+    [_titleLabel setFont:titleFont];
+}
+
+/*!
+ *  Color for the UIPickerView
+ */
+- (void)setTitleColor:(UIColor *)titleColor {
+   
+    [_titleLabel setTextColor:titleColor];
 }
 
 #pragma mark - Done/Cancel

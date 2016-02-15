@@ -86,11 +86,11 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 /*!
  Color for toolBar
  */
-@property(nonatomic, strong) UIColor *toolbarTintColor;
+@property(nonatomic, strong) UIColor *toolbarTintColor UI_APPEARANCE_SELECTOR;
 /*!
  Color for buttons
  */
-@property(nonatomic, strong) UIColor *toolbarButtonColor;
+@property(nonatomic, strong) UIColor *toolbarButtonColor UI_APPEARANCE_SELECTOR;
 
 
 ///----------------------
@@ -147,7 +147,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 /*!
  Font for the UIPickerView
  */
-@property(nonatomic, strong) UIFont *titleFont;
+@property(nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
+
+/*!
+ *  Color for the UIPickerView
+ */
+@property(nonatomic, strong) UIColor *titleColor UI_APPEARANCE_SELECTOR;
 
 
 /*!
