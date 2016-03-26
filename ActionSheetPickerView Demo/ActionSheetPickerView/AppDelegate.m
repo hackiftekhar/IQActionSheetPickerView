@@ -6,6 +6,7 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "IQActionSheetPickerView.h"
 
 @implementation AppDelegate
 @synthesize window;
@@ -13,6 +14,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+ 
+    //IQActionSheetPickerView appearance setting
+    [[IQActionSheetPickerView appearance] setTitleFont:[UIFont systemFontOfSize:18]];
+    [[IQActionSheetPickerView appearance] setTitleColor:[UIColor redColor]];
+    [[IQActionSheetPickerView appearance] setToolbarTintColor:[UIColor whiteColor]];
+    [[IQActionSheetPickerView appearance] setToolbarButtonColor:[UIColor lightGrayColor]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
