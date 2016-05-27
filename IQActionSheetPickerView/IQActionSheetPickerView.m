@@ -191,7 +191,7 @@
 -(void)setToolbarButtonColor:(UIColor *)toolbarButtonColor{
     _toolbarButtonColor = toolbarButtonColor;
     
-    [_actionToolbar setTintColor:buttonColor];
+    [_actionToolbar setTintColor:toolbarButtonColor];
 }
 
 /*!
