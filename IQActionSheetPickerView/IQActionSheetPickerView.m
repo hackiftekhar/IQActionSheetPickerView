@@ -188,7 +188,7 @@
  *
  *  @param buttonColor Custom color for toolBar button
  */
--(void)setToolbarButtonColor:(UIColor *)buttonColor{
+-(void)setToolbarButtonColor:(UIColor *)toolbarButtonColor{
     _toolbarButtonColor = toolbarButtonColor;
     
     [_actionToolbar setTintColor:buttonColor];
