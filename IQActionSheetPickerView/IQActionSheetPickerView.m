@@ -177,9 +177,10 @@
  *
  *  @param barColor Custom color for toolBar
  */
--(void)setToolbarTintColor:(UIColor *)barColor{
+-(void)setToolbarTintColor:(UIColor *)toolbarTintColor{
+    _toolbarTintColor = toolbarTintColor;
     
-    [_actionToolbar setBarTintColor:barColor];
+    [_actionToolbar setBarTintColor:toolbarTintColor];
 }
 
 /**
@@ -187,15 +188,17 @@
  *
  *  @param buttonColor Custom color for toolBar button
  */
--(void)setToolbarButtonColor:(UIColor *)buttonColor{
+-(void)setToolbarButtonColor:(UIColor *)toolbarButtonColor{
+    _toolbarButtonColor = toolbarButtonColor;
     
-    [_actionToolbar setTintColor:buttonColor];
+    [_actionToolbar setTintColor:toolbarButtonColor];
 }
 
 /*!
  Font for the UIPickerView
  */
 - (void)setTitleFont:(UIFont *)titleFont {
+    _titleFont = titleFont;
     
     [_titleLabel setFont:titleFont];
 }
@@ -204,7 +207,8 @@
  *  Color for the UIPickerView
  */
 - (void)setTitleColor:(UIColor *)titleColor {
-   
+    _titleColor = titleColor;
+    
     [_titleLabel setTextColor:titleColor];
 }
 
