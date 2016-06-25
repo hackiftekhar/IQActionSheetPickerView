@@ -45,6 +45,8 @@
     UIViewController *topController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     while ([topController presentedViewController])	topController = [topController presentedViewController];
     
+    [topController.view endEditing:YES];
+    
     //Sending pickerView to bottom of the View.
     __block CGRect pickerViewFrame = pickerView.frame;
     {
