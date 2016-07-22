@@ -26,6 +26,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
 
+NSString * const kAttributesForNormalStateKey = @"kAttributesForNormalStateKey";
+/// Identifies an attributed string of the toolbar title for highlighted state.
+NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlightedStateKey";
+
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIPickerView    *_pickerView;
@@ -72,6 +76,18 @@
             
             //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
+          
+            id attributesForCancelButtonNormalState = [_cancelButtonAttributes objectForKey:kAttributesForNormalStateKey];
+            if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
+              [cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
+            }
+          
+          
+            id attributesForCancelButtonnHighlightedState = [_cancelButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+            if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+              [cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
+            }
+          
             [items addObject:cancelButton];
             
             //  Create a fake button to maintain flexibleSpace between cancelButton and titleLabel.(Otherwise the titleLabel will lean to the left）
@@ -97,6 +113,18 @@
             
             //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
             UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
+            id attributesForDoneButtonNormalState = [_doneButtonAttributes objectForKey:kAttributesForNormalStateKey];
+            if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
+              [doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
+            }
+          
+          
+            id attributesForDoneButtonnHighlightedState = [_doneButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+            if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+              [doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
+            }
+          
+          
             [items addObject:doneButton];
             
             //  Adding button to toolBar.
