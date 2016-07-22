@@ -494,10 +494,13 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *labelText = [[UILabel alloc] init];
-    if(self.titleFont == nil){
+    if(self.pickerComponentsColor != nil) {
+      labelText.textColor = self.pickerComponentsColor;
+    }
+    if(self.pickerComponentsFont == nil){
         labelText.font = [UIFont boldSystemFontOfSize:20.0];
     }else{
-        labelText.font = self.titleFont;
+        labelText.font = self.pickerComponentsFont;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];

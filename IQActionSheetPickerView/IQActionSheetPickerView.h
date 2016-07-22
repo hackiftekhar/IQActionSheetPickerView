@@ -161,12 +161,20 @@ extern NSString * const kAttributesForHighlightedStateKey;
 @property(nonatomic, strong) NSArray *widthsForComponents;
 
 /*!
- Font for the UIPickerView
+ Font for the UIPickerView components
+ */
+@property(nonatomic, strong) UIFont *pickerComponentsFont UI_APPEARANCE_SELECTOR;
+/*!
+ *  Color for the UIPickerView
+ */
+@property(nonatomic, strong) UIColor *pickerComponentsColor UI_APPEARANCE_SELECTOR;
+/*!
+ Font for the UIToolBar title
  */
 @property(nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 
 /*!
- *  Color for the UIPickerView
+ *  Color for the UIToolBar title
  */
 @property(nonatomic, strong) UIColor *titleColor UI_APPEARANCE_SELECTOR;
 
