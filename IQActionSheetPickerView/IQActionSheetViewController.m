@@ -35,7 +35,16 @@
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
+
+- (void) handleTapFrom: (UITapGestureRecognizer *)recognizer
+{
+  //Code to handle the gesture
+  [self dismissWithCompletion:nil];
+}
+
 
 -(void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion
 {
