@@ -97,10 +97,6 @@ extern NSString * const kAttributesForHighlightedStateKey;
  */
 @property(nonatomic, strong) UIColor *toolbarButtonColor UI_APPEARANCE_SELECTOR;
 /*!
- Background color for the `UIPickerView`
- */
-@property(nonatomic, strong) UIColor *pickerViewBackgroundColor UI_APPEARANCE_SELECTOR;
-/*!
  A dictionary containing the attributed strings of the cancel button for normal and highlighted states.
  */
 @property(nonatomic, strong) NSDictionary *cancelButtonAttributes UI_APPEARANCE_SELECTOR;
@@ -164,6 +160,10 @@ extern NSString * const kAttributesForHighlightedStateKey;
  Font for the UIPickerView components
  */
 @property(nonatomic, strong) UIFont *pickerComponentsFont UI_APPEARANCE_SELECTOR;
+/*!
+ Background color for the `UIPickerView`
+ */
+@property(nonatomic, strong) UIColor *pickerViewBackgroundColor UI_APPEARANCE_SELECTOR;
 /*!
  *  Color for the UIPickerView
  */

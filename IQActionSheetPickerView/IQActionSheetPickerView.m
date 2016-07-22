@@ -36,7 +36,9 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
     UIDatePicker    *_datePicker;
     UIToolbar       *_actionToolbar;
     UILabel         *_titleLabel;
-
+    UIBarButtonItem *_cancelButton;
+    UIBarButtonItem *_doneButton;
+  
     IQActionSheetViewController *_actionSheetController;
 }
 
@@ -75,20 +77,9 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
             NSMutableArray *items = [[NSMutableArray alloc] init];
             
             //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
+            _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
           
-            id attributesForCancelButtonNormalState = [_cancelButtonAttributes objectForKey:kAttributesForNormalStateKey];
-            if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
-              [cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
-            }
-          
-          
-            id attributesForCancelButtonnHighlightedState = [_cancelButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
-            if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
-              [cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
-            }
-          
-            [items addObject:cancelButton];
+            [items addObject:_cancelButton];
             
             //  Create a fake button to maintain flexibleSpace between cancelButton and titleLabel.(Otherwise the titleLabel will lean to the left）
             UIBarButtonItem *leftNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -112,20 +103,9 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
             [items addObject:rightNilButton];
             
             //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
-            id attributesForDoneButtonNormalState = [_doneButtonAttributes objectForKey:kAttributesForNormalStateKey];
-            if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
-              [doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
-            }
-          
-          
-            id attributesForDoneButtonnHighlightedState = [_doneButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
-            if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
-              [doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
-            }
-          
-          
-            [items addObject:doneButton];
+            _doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
+
+            [items addObject:_doneButton];
             
             //  Adding button to toolBar.
             [_actionToolbar setItems:items];
@@ -136,7 +116,7 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
         //UIPickerView
         {
             _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , CGRectGetWidth(_actionToolbar.frame), 216)];
-            _pickerView.backgroundColor = [self pickerViewBackgroundColor];
+            _pickerView.backgroundColor = [UIColor whiteColor];
             [_pickerView setShowsSelectionIndicator:YES];
             [_pickerView setDelegate:self];
             [_pickerView setDataSource:self];
@@ -201,6 +181,50 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
 }
 
 /**
+ *  Set Picker View Background Color
+ *
+ *  @param pickerViewBackgroundColor Picker view custom background color
+ */
+-(void)setPickerViewBackgroundColor:(UIColor *)pickerViewBackgroundColor{
+  _pickerView.backgroundColor = pickerViewBackgroundColor;
+}
+
+/**
+ *  Set Cancel Button Title Attributes
+ *
+ *  @param cancelButtonAttributes Cancel Button Title Attributes
+ */
+-(void)setCancelButtonAttributes:(NSDictionary *)cancelButtonAttributes{
+  id attributesForCancelButtonNormalState = [cancelButtonAttributes objectForKey:kAttributesForNormalStateKey];
+  if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
+    [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
+  }
+  
+  id attributesForCancelButtonnHighlightedState = [cancelButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+  if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+    [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
+  }
+}
+
+/**
+ *  Set Done Button Title Attributes
+ *
+ *  @param cancelButtonAttributes Done Button Title Attributes
+ */
+-(void)setDoneButtonAttributes:(NSDictionary *)doneButtonAttributes{
+  id attributesForDoneButtonNormalState = [doneButtonAttributes objectForKey:kAttributesForNormalStateKey];
+  if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
+    [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
+  }
+  
+  
+  id attributesForDoneButtonnHighlightedState = [doneButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+  if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+    [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
+  }
+}
+
+/**
  *  Set Action Bar Color
  *
  *  @param barColor Custom color for toolBar
@@ -220,19 +244,6 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
     _toolbarButtonColor = toolbarButtonColor;
     
     [_actionToolbar setTintColor:toolbarButtonColor];
-}
-
-/**
- *  Get Picker View Background Color
- *
- *  @returns Picker View Background Color
- */
--(UIColor *)pickerViewBackgroundColor{
-  if (_pickerViewBackgroundColor == nil) {
-    return [UIColor whiteColor];
-  } else {
-    return _pickerViewBackgroundColor;
-  }
 }
 
 /*!
