@@ -108,7 +108,7 @@
         //UIPickerView
         {
             _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , CGRectGetWidth(_actionToolbar.frame), 216)];
-            _pickerView.backgroundColor = [UIColor whiteColor];
+            _pickerView.backgroundColor = [self pickerViewBackgroundColor];
             [_pickerView setShowsSelectionIndicator:YES];
             [_pickerView setDelegate:self];
             [_pickerView setDataSource:self];
@@ -192,6 +192,19 @@
     _toolbarButtonColor = toolbarButtonColor;
     
     [_actionToolbar setTintColor:toolbarButtonColor];
+}
+
+/**
+ *  Get Picker View Background Color
+ *
+ *  @returns Picker View Background Color
+ */
+-(UIColor *)pickerViewBackgroundColor{
+  if (_pickerViewBackgroundColor == nil) {
+    return [UIColor whiteColor];
+  } else {
+    return _pickerViewBackgroundColor;
+  }
 }
 
 /*!

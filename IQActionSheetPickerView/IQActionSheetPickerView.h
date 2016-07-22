@@ -91,6 +91,10 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  Color for buttons
  */
 @property(nonatomic, strong) UIColor *toolbarButtonColor UI_APPEARANCE_SELECTOR;
+/*!
+ Background color for the `UIPickerView`
+ */
+@property(nonatomic, strong) UIColor *pickerViewBackgroundColor UI_APPEARANCE_SELECTOR;
 
 
 ///----------------------
