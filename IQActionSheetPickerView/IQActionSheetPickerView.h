@@ -48,10 +48,11 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
     IQActionSheetPickerStyleTimePicker,
 };
 
-/// Identifies an attributed string of the toolbar title for normal state.
-extern NSString * const kAttributesForNormalStateKey;
-/// Identifies an attributed string of the toolbar title for highlighted state.
-extern NSString * const kAttributesForHighlightedStateKey;
+/// These keys are used to set text attributes for both `Cancel` and `Done` toolbar buttons.
+/// Identifies an attributed string of the toolbar button title for normal state.
+extern NSString * const kIQActionSheetAttributesForNormalStateKey;
+/// Identifies an attributed string of the toolbar button title for highlighted state.
+extern NSString * const kIQActionSheetAttributesForHighlightedStateKey;
 
 @class IQActionSheetPickerView;
 

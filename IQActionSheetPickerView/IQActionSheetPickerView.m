@@ -26,9 +26,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
 
-NSString * const kAttributesForNormalStateKey = @"kAttributesForNormalStateKey";
+NSString * const kIQActionSheetAttributesForNormalStateKey = @"kIQActionSheetAttributesForNormalStateKey";
 /// Identifies an attributed string of the toolbar title for highlighted state.
-NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlightedStateKey";
+NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionSheetAttributesForHighlightedStateKey";
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
@@ -195,12 +195,12 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
  *  @param cancelButtonAttributes Cancel Button Title Attributes
  */
 -(void)setCancelButtonAttributes:(NSDictionary *)cancelButtonAttributes{
-  id attributesForCancelButtonNormalState = [cancelButtonAttributes objectForKey:kAttributesForNormalStateKey];
+  id attributesForCancelButtonNormalState = [cancelButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
   if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
     [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
   }
   
-  id attributesForCancelButtonnHighlightedState = [cancelButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+  id attributesForCancelButtonnHighlightedState = [cancelButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
   if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
     [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
   }
@@ -212,13 +212,13 @@ NSString * const kAttributesForHighlightedStateKey = @"kAttributesForHighlighted
  *  @param cancelButtonAttributes Done Button Title Attributes
  */
 -(void)setDoneButtonAttributes:(NSDictionary *)doneButtonAttributes{
-  id attributesForDoneButtonNormalState = [doneButtonAttributes objectForKey:kAttributesForNormalStateKey];
+  id attributesForDoneButtonNormalState = [doneButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
   if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
     [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
   }
   
   
-  id attributesForDoneButtonnHighlightedState = [doneButtonAttributes objectForKey:  kAttributesForHighlightedStateKey];
+  id attributesForDoneButtonnHighlightedState = [doneButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
   if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
     [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
   }
