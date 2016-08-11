@@ -26,13 +26,19 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
 
+NSString * const kIQActionSheetAttributesForNormalStateKey = @"kIQActionSheetAttributesForNormalStateKey";
+/// Identifies an attributed string of the toolbar title for highlighted state.
+NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionSheetAttributesForHighlightedStateKey";
+
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIPickerView    *_pickerView;
     UIDatePicker    *_datePicker;
     UIToolbar       *_actionToolbar;
     UILabel         *_titleLabel;
-
+    UIBarButtonItem *_cancelButton;
+    UIBarButtonItem *_doneButton;
+  
     IQActionSheetViewController *_actionSheetController;
 }
 
@@ -71,8 +77,9 @@
             NSMutableArray *items = [[NSMutableArray alloc] init];
             
             //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
-            [items addObject:cancelButton];
+            _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
+          
+            [items addObject:_cancelButton];
             
             //  Create a fake button to maintain flexibleSpace between cancelButton and titleLabel.(Otherwise the titleLabel will lean to the left）
             UIBarButtonItem *leftNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -96,8 +103,9 @@
             [items addObject:rightNilButton];
             
             //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
-            [items addObject:doneButton];
+            _doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
+
+            [items addObject:_doneButton];
             
             //  Adding button to toolBar.
             [_actionToolbar setItems:items];
@@ -170,6 +178,50 @@
         default:
             break;
     }
+}
+
+/**
+ *  Set Picker View Background Color
+ *
+ *  @param pickerViewBackgroundColor Picker view custom background color
+ */
+-(void)setPickerViewBackgroundColor:(UIColor *)pickerViewBackgroundColor{
+  _pickerView.backgroundColor = pickerViewBackgroundColor;
+}
+
+/**
+ *  Set Cancel Button Title Attributes
+ *
+ *  @param cancelButtonAttributes Cancel Button Title Attributes
+ */
+-(void)setCancelButtonAttributes:(NSDictionary *)cancelButtonAttributes{
+  id attributesForCancelButtonNormalState = [cancelButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
+  if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
+    [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
+  }
+  
+  id attributesForCancelButtonnHighlightedState = [cancelButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
+  if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+    [_cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
+  }
+}
+
+/**
+ *  Set Done Button Title Attributes
+ *
+ *  @param cancelButtonAttributes Done Button Title Attributes
+ */
+-(void)setDoneButtonAttributes:(NSDictionary *)doneButtonAttributes{
+  id attributesForDoneButtonNormalState = [doneButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
+  if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
+    [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
+  }
+  
+  
+  id attributesForDoneButtonnHighlightedState = [doneButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
+  if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
+    [_doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
+  }
 }
 
 /**
@@ -453,10 +505,13 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *labelText = [[UILabel alloc] init];
-    if(self.titleFont == nil){
+    if(self.pickerComponentsColor != nil) {
+      labelText.textColor = self.pickerComponentsColor;
+    }
+    if(self.pickerComponentsFont == nil){
         labelText.font = [UIFont boldSystemFontOfSize:20.0];
     }else{
-        labelText.font = self.titleFont;
+        labelText.font = self.pickerComponentsFont;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [labelText setTextAlignment:NSTextAlignmentCenter];

@@ -25,17 +25,37 @@
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetPickerView.h"
 
-@interface IQActionSheetViewController ()<UIApplicationDelegate>
+@interface IQActionSheetViewController ()<UIApplicationDelegate, UIGestureRecognizerDelegate>
 
 @end
 
-@implementation IQActionSheetViewController
+@implementation IQActionSheetViewController 
 
 -(void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.delegate = self;
 }
+
+- (void) handleTapFrom: (UITapGestureRecognizer *)recognizer
+{
+  //Code to handle the gesture
+  [self dismissWithCompletion:nil];
+}
+
+// MAKR: <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch
+{
+    if (CGRectContainsPoint([self.pickerView bounds], [touch locationInView:self.pickerView]))
+      return NO;
+  
+    return YES;
+}
+
 
 -(void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion
 {
