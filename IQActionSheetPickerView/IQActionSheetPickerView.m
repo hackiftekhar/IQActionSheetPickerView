@@ -1,5 +1,5 @@
 //
-//  IQActionSheetPickerView.m
+// IQActionSheetPickerView.m
 // https://github.com/hackiftekhar/IQActionSheetPickerView
 // Copyright (c) 2013-14 Iftekhar Qurashi.
 //
@@ -25,13 +25,13 @@
 #import "IQActionSheetPickerView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
+#import "IQActionSheetToolbar.h"
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIPickerView    *_pickerView;
     UIDatePicker    *_datePicker;
-    UIToolbar       *_actionToolbar;
-    UILabel         *_titleLabel;
+    IQActionSheetToolbar    *_actionToolbar;
 
     IQActionSheetViewController *_actionSheetController;
 }
@@ -54,54 +54,22 @@
 
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
 {
-    self = [super initWithFrame:CGRectZero];
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    rect.size.height = 216+44;
+    
+    self = [super initWithFrame:rect];
 
     if (self)
     {
         //UIToolbar
         {
-            _actionToolbar = [[UIToolbar alloc] init];
+            _actionToolbar = [[IQActionSheetToolbar alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, 44)];
             _actionToolbar.barStyle = UIBarStyleDefault;
-            [_actionToolbar sizeToFit];
-            
-            CGRect toolbarFrame = _actionToolbar.frame;
-            toolbarFrame.size.height = 44;
-            _actionToolbar.frame = toolbarFrame;
-            
-            NSMutableArray *items = [[NSMutableArray alloc] init];
-            
-            //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
-            [items addObject:cancelButton];
-            
-            //  Create a fake button to maintain flexibleSpace between cancelButton and titleLabel.(Otherwise the titleLabel will lean to the left）
-            UIBarButtonItem *leftNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            [items addObject:leftNilButton];
-            
-            //  Create a title label to show on toolBar for the title you need.
-            _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _actionToolbar.frame.size.width-66-57.0-16, 44)];
-            _titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
-            [_titleLabel setBackgroundColor:[UIColor clearColor]];
-            [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-            [_titleLabel setText:title];
-            [_titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-            
-            UIBarButtonItem *titlebutton = [[UIBarButtonItem alloc] initWithCustomView:_titleLabel];
-//            titlebutton.enabled = NO;
-            [items addObject:titlebutton];
-            
-            
-            //  Create a fake button to maintain flexibleSpace between doneButton and nilButton. (Actually it moves done button to right side.
-            UIBarButtonItem *rightNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            [items addObject:rightNilButton];
-            
-            //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
-            [items addObject:doneButton];
-            
-            //  Adding button to toolBar.
-            [_actionToolbar setItems:items];
-            
+            _actionToolbar.cancelButton.target = self;
+            _actionToolbar.cancelButton.action = @selector(pickerCancelClicked:);
+            _actionToolbar.doneButton.target = self;
+            _actionToolbar.doneButton.action = @selector(pickerDoneClicked:);
+            _actionToolbar.titleButton.title = title;
             [self addSubview:_actionToolbar];
         }
 
@@ -200,7 +168,7 @@
 - (void)setTitleFont:(UIFont *)titleFont {
     _titleFont = titleFont;
     
-    [_titleLabel setFont:titleFont];
+    _actionToolbar.titleButton.font = titleFont;
 }
 
 /*!
@@ -209,7 +177,7 @@
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
     
-    [_titleLabel setTextColor:titleColor];
+    _actionToolbar.titleButton.titleColor = titleColor;
 }
 
 #pragma mark - Done/Cancel

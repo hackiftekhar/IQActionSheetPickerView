@@ -1,5 +1,5 @@
 //
-//  IQActionSheetViewController.m
+// IQActionSheetViewController.m
 // https://github.com/hackiftekhar/IQActionSheetPickerView
 // Copyright (c) 2013-14 Iftekhar Qurashi.
 //

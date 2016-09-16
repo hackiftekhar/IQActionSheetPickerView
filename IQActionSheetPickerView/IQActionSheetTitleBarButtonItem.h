@@ -1,5 +1,5 @@
 //
-// IQActionSheetViewController.h
+// IQActionSheetTitleBarButtonItem.h
 // https://github.com/hackiftekhar/IQActionSheetPickerView
 // Copyright (c) 2013-14 Iftekhar Qurashi.
 //
@@ -21,16 +21,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #import <UIKit/UIKit.h>
 
-@class IQActionSheetPickerView;
+@interface IQActionSheetTitleBarButtonItem : UIBarButtonItem
 
-@interface IQActionSheetViewController : UIViewController
+/**
+ Font to be used in bar button. Default is (system font 12.0 bold).
+ */
+@property(nullable, nonatomic, strong) UIFont *font;
 
-@property(nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
+/**
+ Title color to be used.
+ */
+@property(nullable, nonatomic, strong) UIColor *titleColor;
 
--(void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion;
--(void)dismissWithCompletion:(void (^)(void))completion;
+/**
+ Initialize with frame and title.
+ 
+ @param title Title of barButtonItem.
+ */
+-(nonnull instancetype)initWithTitle:(nullable NSString *)title NS_DESIGNATED_INITIALIZER;
+
+/**
+ Unavailable. Please use initWithFrame:title: method
+ */
+-(nonnull instancetype)init NS_UNAVAILABLE;
+
+/**
+ Unavailable. Please use initWithFrame:title: method
+ */
+-(nonnull instancetype)initWithCoder:(nullable NSCoder *)aDecoder NS_UNAVAILABLE;
+
+/**
+ Unavailable. Please use initWithFrame:title: method
+ */
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 @end

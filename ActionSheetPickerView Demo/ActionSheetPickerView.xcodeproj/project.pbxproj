@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C19CA521D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C19CA4F1D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.m */; };
+		4C19CA531D8C2F0E008BE6CD /* IQActionSheetToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C19CA511D8C2F0E008BE6CD /* IQActionSheetToolbar.m */; };
 		C09D34F019C8BDEE0035BCF5 /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D34ED19C8BDEE0035BCF5 /* IQActionSheetPickerView.m */; };
 		C09D34F119C8BDEE0035BCF5 /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D34EF19C8BDEE0035BCF5 /* IQActionSheetViewController.m */; };
 		E640EA63182EADC100151E83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E640EA62182EADC100151E83 /* UIKit.framework */; };
@@ -23,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C19CA4E1D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetTitleBarButtonItem.h; sourceTree = "<group>"; };
+		4C19CA4F1D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetTitleBarButtonItem.m; sourceTree = "<group>"; };
+		4C19CA501D8C2F0E008BE6CD /* IQActionSheetToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetToolbar.h; sourceTree = "<group>"; };
+		4C19CA511D8C2F0E008BE6CD /* IQActionSheetToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetToolbar.m; sourceTree = "<group>"; };
 		C09D34EC19C8BDEE0035BCF5 /* IQActionSheetPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetPickerView.h; sourceTree = "<group>"; };
 		C09D34ED19C8BDEE0035BCF5 /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
 		C09D34EE19C8BDEE0035BCF5 /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
@@ -64,6 +70,10 @@
 			children = (
 				C09D34EC19C8BDEE0035BCF5 /* IQActionSheetPickerView.h */,
 				C09D34ED19C8BDEE0035BCF5 /* IQActionSheetPickerView.m */,
+				4C19CA4E1D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.h */,
+				4C19CA4F1D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.m */,
+				4C19CA501D8C2F0E008BE6CD /* IQActionSheetToolbar.h */,
+				4C19CA511D8C2F0E008BE6CD /* IQActionSheetToolbar.m */,
 				C09D34EE19C8BDEE0035BCF5 /* IQActionSheetViewController.h */,
 				C09D34EF19C8BDEE0035BCF5 /* IQActionSheetViewController.m */,
 			);
@@ -200,8 +210,10 @@
 				E640EA6F182EADC100151E83 /* main.m in Sources */,
 				E640EA73182EADC100151E83 /* AppDelegate.m in Sources */,
 				C09D34F119C8BDEE0035BCF5 /* IQActionSheetViewController.m in Sources */,
+				4C19CA531D8C2F0E008BE6CD /* IQActionSheetToolbar.m in Sources */,
 				C09D34F019C8BDEE0035BCF5 /* IQActionSheetPickerView.m in Sources */,
 				E640EA7C182EADC100151E83 /* ViewController.m in Sources */,
+				4C19CA521D8C2F0E008BE6CD /* IQActionSheetTitleBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

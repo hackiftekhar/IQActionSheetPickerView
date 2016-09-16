@@ -1,5 +1,5 @@
 //
-// IQActionSheetViewController.h
+// IQActionSheetToolbar.h
 // https://github.com/hackiftekhar/IQActionSheetPickerView
 // Copyright (c) 2013-14 Iftekhar Qurashi.
 //
@@ -21,16 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #import <UIKit/UIKit.h>
+#import "IQActionSheetTitleBarButtonItem.h"
 
-@class IQActionSheetPickerView;
+@interface IQActionSheetToolbar : UIToolbar
 
-@interface IQActionSheetViewController : UIViewController
+@property(nullable, nonatomic, strong) UIBarButtonItem *cancelButton;
 
-@property(nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
+@property(nullable, nonatomic, strong) IQActionSheetTitleBarButtonItem *titleButton;
 
--(void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion;
--(void)dismissWithCompletion:(void (^)(void))completion;
+@property(nullable, nonatomic, strong) UIBarButtonItem *doneButton;
 
 @end
