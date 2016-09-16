@@ -48,6 +48,12 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
     IQActionSheetPickerStyleTimePicker,
 };
 
+/// These keys are used to set text attributes for both `Cancel` and `Done` toolbar buttons.
+/// Identifies an attributed string of the toolbar button title for normal state.
+extern NSString * const kIQActionSheetAttributesForNormalStateKey;
+/// Identifies an attributed string of the toolbar button title for highlighted state.
+extern NSString * const kIQActionSheetAttributesForHighlightedStateKey;
+
 @class IQActionSheetPickerView;
 
 /*!
@@ -91,7 +97,14 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  Color for buttons
  */
 @property(nonatomic, strong) UIColor *toolbarButtonColor UI_APPEARANCE_SELECTOR;
-
+/*!
+ A dictionary containing the attributed strings of the cancel button for normal and highlighted states.
+ */
+@property(nonatomic, strong) NSDictionary *cancelButtonAttributes UI_APPEARANCE_SELECTOR;
+/*!
+ A dictionary containing the attributed strings of the done button for normal and highlighted states.
+ */
+@property(nonatomic, strong) NSDictionary *doneButtonAttributes UI_APPEARANCE_SELECTOR;
 
 ///----------------------
 /// @name Show / Hide
@@ -145,12 +158,24 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 @property(nonatomic, strong) NSArray *widthsForComponents;
 
 /*!
- Font for the UIPickerView
+ Font for the UIPickerView components
+ */
+@property(nonatomic, strong) UIFont *pickerComponentsFont UI_APPEARANCE_SELECTOR;
+/*!
+ Background color for the `UIPickerView`
+ */
+@property(nonatomic, strong) UIColor *pickerViewBackgroundColor UI_APPEARANCE_SELECTOR;
+/*!
+ *  Color for the UIPickerView
+ */
+@property(nonatomic, strong) UIColor *pickerComponentsColor UI_APPEARANCE_SELECTOR;
+/*!
+ Font for the UIToolBar title
  */
 @property(nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 
 /*!
- *  Color for the UIPickerView
+ *  Color for the UIToolBar title
  */
 @property(nonatomic, strong) UIColor *titleColor UI_APPEARANCE_SELECTOR;
 
