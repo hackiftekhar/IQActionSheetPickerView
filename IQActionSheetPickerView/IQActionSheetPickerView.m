@@ -433,21 +433,14 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     //If having widths
     if (_widthsForComponents)
     {
-        //If object isKind of NSNumber class
-        if ([_widthsForComponents[component] isKindOfClass:[NSNumber class]])
-        {
-            CGFloat width = [_widthsForComponents[component] floatValue];
-            
-            //If width is 0, then calculating it's size.
-            if (width == 0)
-                return ((pickerView.bounds.size.width-20)-2*(_titlesForComponents.count-1))/_titlesForComponents.count;
-            //Else returning it's width.
-            else
-                return width;
-        }
-        //Else calculating it's size.
-        else
+        CGFloat width = [_widthsForComponents[component] floatValue];
+        
+        //If width is 0, then calculating it's size.
+        if (width <= 0)
             return ((pickerView.bounds.size.width-20)-2*(_titlesForComponents.count-1))/_titlesForComponents.count;
+        //Else returning it's width.
+        else
+            return width;
     }
     //Else calculating it's size.
     else
