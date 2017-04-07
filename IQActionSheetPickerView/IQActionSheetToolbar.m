@@ -149,9 +149,9 @@
     rightBarButtonView.frame = rect;
     
     /*Title Bar Button Item*/
-    CGFloat x = CGRectGetMaxX(leftBarButtonView.frame) + 16;
+    CGFloat x = CGRectGetMaxX(leftBarButtonView.frame) + 24;
     
-    CGFloat width = (CGRectGetMinX(rightBarButtonView.frame)-16)-x;
+    CGFloat width = (CGRectGetMinX(rightBarButtonView.frame)-24)-x;
     
     rect = titleBarButtonView.frame;
     rect.origin.x = x;
