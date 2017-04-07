@@ -84,6 +84,7 @@
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         [topController addChildViewController: self];
         [topController.view addSubview: self.view];
+        [self didMoveToParentViewController:topController];
     }
 
     //Sliding up the pickerView with animation

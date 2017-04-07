@@ -36,9 +36,9 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     UIPickerView    *_pickerView;
     UIDatePicker    *_datePicker;
     IQActionSheetToolbar    *_actionToolbar;
-
-    IQActionSheetViewController *_actionSheetController;
 }
+
+@property(nonatomic, strong) IQActionSheetViewController *actionSheetController;
 
 @end
 
@@ -502,11 +502,13 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
 -(void)dismiss
 {
     [_actionSheetController dismissWithCompletion:nil];
+    _actionSheetController = nil;
 }
 
 -(void)dismissWithCompletion:(void (^)(void))completion
 {
     [_actionSheetController dismissWithCompletion:completion];
+    _actionSheetController = nil;
 }
 
 -(void)show
@@ -518,8 +520,12 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
 {
     [_pickerView reloadAllComponents];
     
-    _actionSheetController = [[IQActionSheetViewController alloc] init];
-    [_actionSheetController showPickerView:self completion:completion];
+    if (_actionSheetController == nil)
+    {
+        _actionSheetController = [[IQActionSheetViewController alloc] init];
+        [_actionSheetController showPickerView:self completion:completion];
+        
+    }
 }
 
 
