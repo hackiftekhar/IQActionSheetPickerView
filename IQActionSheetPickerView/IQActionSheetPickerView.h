@@ -23,10 +23,7 @@
 
 
 #import <UIKit/UIKit.h>
-
-#if !(__has_feature(objc_instancetype))
-#define instancetype id
-#endif
+#import "IQActionSheetToolbar.h"
 
 /**
 Action Sheet style settings.
@@ -47,12 +44,6 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
     
     IQActionSheetPickerStyleTimePicker,
 };
-
-/// These keys are used to set text attributes for both `Cancel` and `Done` toolbar buttons.
-/// Identifies an attributed string of the toolbar button title for normal state.
-extern NSString * _Nonnull const kIQActionSheetAttributesForNormalStateKey;
-/// Identifies an attributed string of the toolbar button title for highlighted state.
-extern NSString * _Nonnull const kIQActionSheetAttributesForHighlightedStateKey;
 
 @class IQActionSheetPickerView;
 
@@ -92,19 +83,7 @@ extern NSString * _Nonnull const kIQActionSheetAttributesForHighlightedStateKey;
 /*!
  Color for toolBar
  */
-@property(nullable, nonatomic, strong) UIColor *toolbarTintColor UI_APPEARANCE_SELECTOR;
-/*!
- Color for buttons
- */
-@property(nullable, nonatomic, strong) UIColor *toolbarButtonColor UI_APPEARANCE_SELECTOR;
-/*!
- A dictionary containing the attributed strings of the cancel button for normal and highlighted states.
- */
-@property(nullable, nonatomic, strong) NSDictionary<NSString*,id> *cancelButtonAttributes UI_APPEARANCE_SELECTOR;
-/*!
- A dictionary containing the attributed strings of the done button for normal and highlighted states.
- */
-@property(nullable, nonatomic, strong) NSDictionary<NSString*,id> *doneButtonAttributes UI_APPEARANCE_SELECTOR;
+@property(nullable, nonatomic, readonly) IQActionSheetToolbar *actionToolbar;
 
 ///----------------------
 /// @name Show / Hide
@@ -131,31 +110,35 @@ extern NSString * _Nonnull const kIQActionSheetAttributesForHighlightedStateKey;
  */
 -(void)dismissWithCompletion:(nullable void (^)(void))completion;
 
+/*!
+ Disable dismiss action sheet when touching blank area at the top.
+ */
+@property(nonatomic, assign) BOOL disableDismissOnTouchOutside;
+
 
 ///-----------------------------------------
 /// @name IQActionSheetPickerStyleTextPicker
 ///-----------------------------------------
 
 /*!
- selected titles for each component. Please use [ NSArray of NSString ] format. (Not Animated)
+ selected titles for each component. (Not Animated)
  */
 @property(nullable, nonatomic, strong) NSArray<NSString*> *selectedTitles;
 
 /*!
- set selected titles for each component. Please use [ NSArray of NSString ] format.
+ set selected titles for each component.
  */
 -(void)setSelectedTitles:(nonnull NSArray<NSString*> *)selectedTitles animated:(BOOL)animated;
 
 /*!
- Titles to show for component. Please use [ NSArray(numberOfComponents) of [ NSArray of NSString ](RowValueForEachComponent)] format, even there is single row to show, For example.
-                @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
+ Titles to show for component. For example. @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
  */
 @property(nullable, nonatomic, strong) NSArray<NSArray<NSString*> *> *titlesForComponents;
 
 /*!
- Width to adopt for each component. Please use [NSArray of NSNumber] format. If you don't want to specify a row width then use @(0) to calculate row width automatically.
+ Width to adopt for each component. If you don't want to specify a row width then use @(0) to calculate row width automatically.
  */
-@property(nullable, nonatomic, strong) NSArray<id> *widthsForComponents;
+@property(nullable, nonatomic, strong) NSArray<NSNumber*> *widthsForComponents;
 
 /*!
  Font for the UIPickerView components
@@ -169,19 +152,9 @@ extern NSString * _Nonnull const kIQActionSheetAttributesForHighlightedStateKey;
  *  Color for the UIPickerView
  */
 @property(nullable, nonatomic, strong) UIColor *pickerComponentsColor UI_APPEARANCE_SELECTOR;
-/*!
- Font for the UIToolBar title
- */
-@property(nullable, nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 
 /*!
- *  Color for the UIToolBar title
- */
-@property(nullable, nonatomic, strong) UIColor *titleColor UI_APPEARANCE_SELECTOR;
-
-
-/*!
- Select the provided index row for each component. Please use [ NSArray of NSNumber ] format for indexes. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.
+ Select the provided index row for each component. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.
  */
 -(void)selectIndexes:(nonnull NSArray<NSNumber*> *)indexes animated:(BOOL)animated;
 

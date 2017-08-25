@@ -27,17 +27,41 @@
 
 @interface IQActionSheetViewController ()<UIApplicationDelegate, UIGestureRecognizerDelegate>
 
+@property(nonatomic, readonly) UITapGestureRecognizer *tappedDismissGestureRecognizer;
+
 @end
 
 @implementation IQActionSheetViewController 
+@synthesize tappedDismissGestureRecognizer = _tappedDismissGestureRecognizer;
 
 -(void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view.backgroundColor = [UIColor clearColor];
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-    tapGestureRecognizer.delegate = self;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self.view addGestureRecognizer:self.tappedDismissGestureRecognizer];
+}
+
+-(void)setDisableDismissOnTouchOutside:(BOOL)disableDismissOnTouchOutside
+{
+    _disableDismissOnTouchOutside = disableDismissOnTouchOutside;
+    self.tappedDismissGestureRecognizer.enabled = !disableDismissOnTouchOutside;
+}
+
+-(UITapGestureRecognizer *)tappedDismissGestureRecognizer
+{
+    if (_tappedDismissGestureRecognizer == nil)
+    {
+        _tappedDismissGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+        _tappedDismissGestureRecognizer.delegate = self;
+    }
+    
+    return _tappedDismissGestureRecognizer;
 }
 
 - (void) handleTapFrom: (UITapGestureRecognizer *)recognizer

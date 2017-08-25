@@ -27,15 +27,10 @@
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetToolbar.h"
 
-NSString * const kIQActionSheetAttributesForNormalStateKey = @"kIQActionSheetAttributesForNormalStateKey";
-/// Identifies an attributed string of the toolbar title for highlighted state.
-NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionSheetAttributesForHighlightedStateKey";
-
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIPickerView    *_pickerView;
     UIDatePicker    *_datePicker;
-    IQActionSheetToolbar    *_actionToolbar;
 }
 
 @property(nonatomic, strong) IQActionSheetViewController *actionSheetController;
@@ -151,81 +146,6 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
  */
 -(void)setPickerViewBackgroundColor:(UIColor *)pickerViewBackgroundColor{
   _pickerView.backgroundColor = pickerViewBackgroundColor;
-}
-
-/**
- *  Set Cancel Button Title Attributes
- *
- *  @param cancelButtonAttributes Cancel Button Title Attributes
- */
--(void)setCancelButtonAttributes:(NSDictionary *)cancelButtonAttributes{
-  id attributesForCancelButtonNormalState = [cancelButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
-  if (attributesForCancelButtonNormalState != nil && [attributesForCancelButtonNormalState isKindOfClass:[NSDictionary class]]) {
-    [_actionToolbar.cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonNormalState forState:UIControlStateNormal];
-  }
-  
-  id attributesForCancelButtonnHighlightedState = [cancelButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
-  if (attributesForCancelButtonnHighlightedState != nil && [attributesForCancelButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
-    [_actionToolbar.cancelButton setTitleTextAttributes:(NSDictionary *)attributesForCancelButtonnHighlightedState forState:UIControlStateHighlighted];
-  }
-}
-
-/**
- *  Set Done Button Title Attributes
- *
- *  @param cancelButtonAttributes Done Button Title Attributes
- */
--(void)setDoneButtonAttributes:(NSDictionary *)doneButtonAttributes{
-  id attributesForDoneButtonNormalState = [doneButtonAttributes objectForKey:kIQActionSheetAttributesForNormalStateKey];
-  if (attributesForDoneButtonNormalState != nil && [attributesForDoneButtonNormalState isKindOfClass:[NSDictionary class]]) {
-    [_actionToolbar.doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonNormalState forState:UIControlStateNormal];
-  }
-  
-  
-  id attributesForDoneButtonnHighlightedState = [doneButtonAttributes objectForKey:  kIQActionSheetAttributesForHighlightedStateKey];
-  if (attributesForDoneButtonnHighlightedState != nil && [attributesForDoneButtonnHighlightedState isKindOfClass:[NSDictionary class]]) {
-    [_actionToolbar.doneButton setTitleTextAttributes:(NSDictionary *)attributesForDoneButtonnHighlightedState forState:UIControlStateHighlighted];
-  }
-}
-
-/**
- *  Set Action Bar Color
- *
- *  @param barColor Custom color for toolBar
- */
--(void)setToolbarTintColor:(UIColor *)toolbarTintColor{
-    _toolbarTintColor = toolbarTintColor;
-    
-    [_actionToolbar setBarTintColor:toolbarTintColor];
-}
-
-/**
- *  Set Action Tool Bar Button Color
- *
- *  @param buttonColor Custom color for toolBar button
- */
--(void)setToolbarButtonColor:(UIColor *)toolbarButtonColor{
-    _toolbarButtonColor = toolbarButtonColor;
-    
-    [_actionToolbar setTintColor:toolbarButtonColor];
-}
-
-/*!
- Font for the UIPickerView
- */
-- (void)setTitleFont:(UIFont *)titleFont {
-    _titleFont = titleFont;
-    
-    _actionToolbar.titleButton.font = titleFont;
-}
-
-/*!
- *  Color for the UIPickerView
- */
-- (void)setTitleColor:(UIColor *)titleColor {
-    _titleColor = titleColor;
-    
-    _actionToolbar.titleButton.titleColor = titleColor;
 }
 
 #pragma mark - Done/Cancel
@@ -511,6 +431,12 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     _actionSheetController = nil;
 }
 
+-(void)setDisableDismissOnTouchOutside:(BOOL)disableDismissOnTouchOutside
+{
+    _disableDismissOnTouchOutside = disableDismissOnTouchOutside;
+    _actionSheetController.disableDismissOnTouchOutside = _disableDismissOnTouchOutside;
+}
+
 -(void)show
 {
     [self showWithCompletion:nil];
@@ -523,6 +449,7 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     if (_actionSheetController == nil)
     {
         _actionSheetController = [[IQActionSheetViewController alloc] init];
+        _actionSheetController.disableDismissOnTouchOutside = self.disableDismissOnTouchOutside;
         [_actionSheetController showPickerView:self completion:completion];
         
     }

@@ -30,6 +30,11 @@
 
 @property(nonnull, nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
 
+/*!
+ Disable dismiss action sheet when touching blank area at the top.
+ */
+@property(nonatomic, assign) BOOL disableDismissOnTouchOutside;
+
 -(void)showPickerView:(nonnull IQActionSheetPickerView*)pickerView completion:(nullable void (^)(void))completion;
 -(void)dismissWithCompletion:(nullable void (^)(void))completion;
 

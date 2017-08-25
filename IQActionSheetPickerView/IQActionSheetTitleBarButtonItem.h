@@ -28,12 +28,12 @@
 /**
  Font to be used in bar button. Default is (system font 12.0 bold).
  */
-@property(nullable, nonatomic, strong) UIFont *font;
+@property(nullable, nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 
 /**
  Title color to be used.
  */
-@property(nullable, nonatomic, strong) UIColor *titleColor;
+@property(nullable, nonatomic, strong) UIColor *titleColor UI_APPEARANCE_SELECTOR;
 
 /**
  Initialize with frame and title.
