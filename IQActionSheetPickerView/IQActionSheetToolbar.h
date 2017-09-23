@@ -23,7 +23,7 @@
 
 #import "IQActionSheetTitleBarButtonItem.h"
 
-@import UIKit.UIToolbar;
+#import <UIKit/UIToolbar.h>
 
 /// These keys are used to set text attributes for both `Cancel` and `Done` toolbar buttons.
 /// Identifies an attributed string of the toolbar button title for normal state.

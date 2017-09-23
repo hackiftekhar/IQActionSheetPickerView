@@ -23,11 +23,11 @@
 
 #import "IQActionSheetTitleBarButtonItem.h"
 
-@import UIKit.UIButton;
-@import UIKit.UILabel;
-@import UIKit.UIDatePicker;
-@import UIKit.UIPickerView;
-@import Foundation.NSDate;
+#import <UIKit/UIButton.h>
+#import <UIKit/UILabel.h>
+#import <UIKit/UIDatePicker.h>
+#import <UIKit/UIPickerView.h>
+#import <Foundation/NSDate.h>
 
 @implementation IQActionSheetTitleBarButtonItem
 {

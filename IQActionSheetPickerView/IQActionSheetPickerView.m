@@ -25,11 +25,11 @@
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetToolbar.h"
 
-@import UIKit.UIPickerView;
-@import UIKit.UIDatePicker;
-@import UIKit.UIWindow;
-@import UIKit.UIScreen;
-@import UIKit.UILabel;
+#import <UIKit/UIPickerView.h>
+#import <UIKit/UIDatePicker.h>
+#import <UIKit/UIWindow.h>
+#import <UIKit/UIScreen.h>
+#import <UIKit/UILabel.h>
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {

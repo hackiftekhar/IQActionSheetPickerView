@@ -24,8 +24,8 @@
 
 #import "IQActionSheetToolbar.h"
 
-@import UIKit.UIControl;
-@import Foundation.NSArray;
+#import <UIKit/UIControl.h>
+#import <Foundation/NSArray.h>
 
 @class NSString, NSNumber, NSDate;
 @class UIFont, UIColor;
