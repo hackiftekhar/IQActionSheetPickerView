@@ -21,8 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
 #import "IQActionSheetTitleBarButtonItem.h"
+
+@import UIKit.UIToolbar;
 
 /// These keys are used to set text attributes for both `Cancel` and `Done` toolbar buttons.
 /// Identifies an attributed string of the toolbar button title for normal state.

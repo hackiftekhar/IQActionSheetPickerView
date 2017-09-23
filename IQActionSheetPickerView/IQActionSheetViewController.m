@@ -25,7 +25,11 @@
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetPickerView.h"
 
-@interface IQActionSheetViewController ()<UIApplicationDelegate, UIGestureRecognizerDelegate>
+@import UIKit.UITapGestureRecognizer;
+@import UIKit.UIWindow;
+@import UIKit.UIScreen;
+
+@interface IQActionSheetViewController ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, readonly) UITapGestureRecognizer *tappedDismissGestureRecognizer;
 

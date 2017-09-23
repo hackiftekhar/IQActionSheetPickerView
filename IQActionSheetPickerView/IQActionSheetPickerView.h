@@ -22,8 +22,13 @@
 // THE SOFTWARE.
 
 
-#import <UIKit/UIKit.h>
 #import "IQActionSheetToolbar.h"
+
+@import UIKit.UIControl;
+@import Foundation.NSArray;
+
+@class NSString, NSNumber, NSDate;
+@class UIFont, UIColor;
 
 /**
 Action Sheet style settings.

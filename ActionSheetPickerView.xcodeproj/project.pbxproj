@@ -363,9 +363,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53B202809B5F1035737D2BB2 /* Pods-ActionSheetPickerView.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_MODULES_AUTOLINK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ActionSheetPickerView/ActionSheetPickerView-Prefix.pch";
@@ -384,9 +387,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA73CE97AB8AB2932C413F34 /* Pods-ActionSheetPickerView.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_MODULES_AUTOLINK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ActionSheetPickerView/ActionSheetPickerView-Prefix.pch";

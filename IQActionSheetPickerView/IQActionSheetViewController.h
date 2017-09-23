@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 
-#import <UIKit/UIKit.h>
+@import UIKit.UIViewController;
 
 @class IQActionSheetPickerView;
 

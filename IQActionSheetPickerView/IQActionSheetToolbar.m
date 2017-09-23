@@ -24,6 +24,8 @@
 #import "IQActionSheetToolbar.h"
 #import "IQActionSheetTitleBarButtonItem.h"
 
+@import UIKit.UIAccessibility;
+
 NSString * const kIQActionSheetAttributesForNormalStateKey = @"kIQActionSheetAttributesForNormalStateKey";
 /// Identifies an attributed string of the toolbar title for highlighted state.
 NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionSheetAttributesForHighlightedStateKey";

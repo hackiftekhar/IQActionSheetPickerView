@@ -21,11 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 #import "IQActionSheetPickerView.h"
-#import <QuartzCore/QuartzCore.h>
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetToolbar.h"
+
+@import UIKit.UIPickerView;
+@import UIKit.UIDatePicker;
+@import UIKit.UIWindow;
+@import UIKit.UIScreen;
+@import UIKit.UILabel;
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
