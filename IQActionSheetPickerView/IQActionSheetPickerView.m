@@ -60,21 +60,23 @@
 
     if (self)
     {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         //UIToolbar
         {
-            _actionToolbar = [[IQActionSheetToolbar alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, 44)];
+            _actionToolbar = [[IQActionSheetToolbar alloc] init];
+            [_actionToolbar sizeToFit];
             _actionToolbar.barStyle = UIBarStyleDefault;
             _actionToolbar.cancelButton.target = self;
             _actionToolbar.cancelButton.action = @selector(pickerCancelClicked:);
             _actionToolbar.doneButton.target = self;
             _actionToolbar.doneButton.action = @selector(pickerDoneClicked:);
             _actionToolbar.titleButton.title = title;
-            [self addSubview:_actionToolbar];
         }
 
         //UIPickerView
         {
-            _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , CGRectGetWidth(_actionToolbar.frame), 216)];
+            _pickerView = [[UIPickerView alloc] init];
+            [_pickerView sizeToFit];
             _pickerView.backgroundColor = [UIColor whiteColor];
             [_pickerView setShowsSelectionIndicator:YES];
             [_pickerView setDelegate:self];
@@ -84,23 +86,32 @@
         
         //UIDatePicker
         {
-            _datePicker = [[UIDatePicker alloc] initWithFrame:_pickerView.frame];
+            _datePicker = [[UIDatePicker alloc] init];
+            [_datePicker sizeToFit];
             [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-            _datePicker.frame = _pickerView.frame;
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
             [self addSubview:_datePicker];
         }
         
+        NSDictionary *viewDict = NSDictionaryOfVariableBindings(_pickerView, _datePicker);
+        _pickerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _datePicker.translatesAutoresizingMaskIntoConstraints = NO;
+
+        NSArray<NSLayoutConstraint*>*horizontalPickerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|[_pickerView]|" options:0 metrics:nil views:viewDict];
+        NSArray<NSLayoutConstraint*>*verticalPickerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_pickerView]|" options:NSLayoutFormatAlignAllLeading|NSLayoutFormatAlignAllTrailing metrics:nil views:viewDict];
+
+        NSArray<NSLayoutConstraint*>*horizontalDateConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|[_datePicker]|" options:0 metrics:nil views:viewDict];
+        NSArray<NSLayoutConstraint*>*verticalDateConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_datePicker]|" options:0 metrics:nil views:viewDict];
+
+        [self addConstraints:horizontalPickerConstraints];
+        [self addConstraints:verticalPickerConstraints];
+        [self addConstraints:horizontalDateConstraints];
+        [self addConstraints:verticalDateConstraints];
+
         //Initial settings
         {
             self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
-            [self setFrame:CGRectMake(0, 0, CGRectGetWidth(_pickerView.frame), CGRectGetMaxY(_pickerView.frame))];
             [self setActionSheetPickerStyle:IQActionSheetPickerStyleTextPicker];
-            
-            self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
-            _actionToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            _pickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            _datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
     }
     
@@ -202,8 +213,6 @@
         case IQActionSheetPickerStyleTimePicker:
         {
             [self setDate:_datePicker.date];
-            
-            [self setSelectedTitles:@[_datePicker.date]];
             
             if ([self.delegate respondsToSelector:@selector(actionSheetPickerView:didSelectDate:)])
             {

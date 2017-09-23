@@ -40,6 +40,16 @@
     self.view.backgroundColor = [UIColor clearColor];
 }
 
+-(BOOL)canBecomeFirstResponder
+{
+	return YES;
+}
+    
+-(BOOL)canResignFirstResponder
+{
+    return YES;
+}
+    
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,7 +68,6 @@
     if (_tappedDismissGestureRecognizer == nil)
     {
         _tappedDismissGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-        _tappedDismissGestureRecognizer.delegate = self;
     }
     
     return _tappedDismissGestureRecognizer;
@@ -73,17 +82,6 @@
     }
 }
 
-// MAKR: <UIGestureRecognizerDelegate>
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-       shouldReceiveTouch:(UITouch *)touch
-{
-    if (CGRectContainsPoint([self.pickerView bounds], [touch locationInView:self.pickerView]))
-      return NO;
-  
-    return YES;
-}
-
-
 -(void)showPickerView:(IQActionSheetPickerView*)pickerView completion:(void (^)(void))completion
 {
     _pickerView = pickerView;
@@ -94,13 +92,8 @@
     
     [topController.view endEditing:YES];
     
-    //Sending pickerView to bottom of the View.
-    __block CGRect pickerViewFrame = pickerView.frame;
-    {
-        pickerViewFrame.origin.y = self.view.bounds.size.height;
-        pickerView.frame = pickerViewFrame;
-        [self.view addSubview:pickerView];
-    }
+    self.inputView = pickerView;
+    self.inputAccessoryView = pickerView.actionToolbar;
     
     //Adding self.view to topMostController.view and adding self as childViewController to topMostController
     {
@@ -110,13 +103,12 @@
         [topController.view addSubview: self.view];
         [self didMoveToParentViewController:topController];
     }
+    
+    [self becomeFirstResponder];
 
     //Sliding up the pickerView with animation
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|7<<16 animations:^{
         self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        
-        pickerViewFrame.origin.y = self.view.bounds.size.height-pickerViewFrame.size.height;
-        pickerView.frame = pickerViewFrame;
 
     } completion:^(BOOL finished) {
         if (completion) completion();
@@ -125,19 +117,15 @@
 
 -(void)dismissWithCompletion:(void (^)(void))completion
 {
+    [self resignFirstResponder];
+    
     //Sliding down the pickerView with animation.
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|7<<16 animations:^{
         
         self.view.backgroundColor = [UIColor clearColor];
-        CGRect pickerViewFrame = _pickerView.frame;
-        pickerViewFrame.origin.y = self.view.bounds.size.height;
-        _pickerView.frame = pickerViewFrame;
         
     } completion:^(BOOL finished) {
 
-        //Removing pickerView from self.view
-        [_pickerView removeFromSuperview];
-        
         //Removing self.view from topMostController.view and removing self as childViewController from topMostController
         [self willMoveToParentViewController:nil];
         [self.view removeFromSuperview];

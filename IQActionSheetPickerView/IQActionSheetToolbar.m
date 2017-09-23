@@ -81,7 +81,7 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
 {
     UIBarButtonItem *nilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
-    NSMutableArray *items = [[NSMutableArray alloc] init];
+    NSMutableArray<UIBarButtonItem*> *items = [[NSMutableArray alloc] init];
     
     if (self.cancelButton)
     {
@@ -106,7 +106,7 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     }
     
     //  Adding button to toolBar.
-    [self setItems:@[self.cancelButton,nilButton,self.titleButton,nilButton,self.doneButton]];
+    [self setItems:items];
 }
 
 -(void)setCancelButton:(UIBarButtonItem *)cancelButton
@@ -162,6 +162,15 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     return sizeThatFit;
 }
 
+-(CGSize)intrinsicContentSize
+{
+    CGSize intrinsicContentSize = [super intrinsicContentSize];
+    
+    intrinsicContentSize.height = 44;
+    
+    return intrinsicContentSize;
+}
+    
 -(void)setTintColor:(UIColor *)tintColor
 {
     [super setTintColor:tintColor];
@@ -169,6 +178,17 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
     for (UIBarButtonItem *item in self.items)
     {
         [item setTintColor:tintColor];
+    }
+}
+
+// Allows you to perform layout before the drawing cycle happens. -layoutIfNeeded forces layout early
+- (void)setNeedsLayout
+{
+    [super setNeedsLayout];
+
+    if ([[NSProcessInfo processInfo] operatingSystemVersion].majorVersion < 11)
+    {
+        self.titleButton.customView.frame = CGRectMake(0, CGRectGetMidY(self.bounds), 0, self.frame.size.height);
     }
 }
 
@@ -220,24 +240,31 @@ NSString * const kIQActionSheetAttributesForHighlightedStateKey = @"kIQActionShe
             }
         }
         
-        CGFloat x = 16;
+        CGFloat minX = 0;
         
         if (CGRectIsNull(leftRect) == false)
         {
-            x = CGRectGetMaxX(leftRect) + 16;
+            minX = CGRectGetMaxX(leftRect) + 20;
         }
-        
-        CGFloat width = CGRectGetWidth(self.frame) - 32 - (CGRectIsNull(leftRect)?0:CGRectGetMaxX(leftRect)) - (CGRectIsNull(rightRect)?0:CGRectGetWidth(self.frame)-CGRectGetMinX(rightRect));
-        
-        for (UIBarButtonItem *item in self.items)
+        else
         {
-            if ([item isKindOfClass:[IQActionSheetTitleBarButtonItem class]])
-            {
-                CGRect titleRect = CGRectMake(x, 0, width, self.frame.size.height);
-                item.customView.frame = titleRect;
-                break;
-            }
+            minX = 20;
         }
+        
+        CGFloat maxX = 0;
+        
+        if (CGRectIsNull(rightRect) == false)
+        {
+            maxX = CGRectGetMinX(rightRect) - 20;
+        }
+        else
+        {
+            maxX = CGRectGetWidth(self.frame) - 20;
+        }
+        
+        CGFloat width = maxX - minX;
+        
+        self.titleButton.customView.frame = CGRectMake(minX, 0, width, self.frame.size.height);
     }
 }
 

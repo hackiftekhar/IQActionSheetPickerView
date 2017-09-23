@@ -30,6 +30,9 @@
 
 @property(nonnull, nonatomic, strong, readonly) IQActionSheetPickerView *pickerView;
 
+@property (nullable, readwrite, strong) UIView *inputView;
+@property (nullable, readwrite, strong) UIView *inputAccessoryView;
+    
 /*!
  Disable dismiss action sheet when touching blank area at the top.
  */
