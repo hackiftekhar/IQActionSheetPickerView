@@ -65,12 +65,22 @@
 
 - (IBAction)onePickerViewClicked:(UIButton *)sender
 {
-     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Single Picker" delegate:self];
-    picker.actionToolbar.titleButton.titleFont = [UIFont systemFontOfSize:12];
-    picker.actionToolbar.titleButton.titleColor = [UIColor redColor];
-    [picker setTag:1];
-    [picker setTitlesForComponents:@[@[@"First", @"Second", @"Third", @"Four", @"Five"]]];
-    [picker show];
+    IQActionSheetPickerView *pickerView = [[IQActionSheetPickerView alloc] initWithTitle:@"Reminder" delegate:self];
+
+    pickerView.actionSheetPickerStyle = IQActionSheetPickerStyleTextPicker;
+    pickerView.titlesForComponents = @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12"],@[@"AM",@"PM"]];
+//    pickerView.actionToolbar.tintColor = [UIColor blueAppColor];
+    
+    pickerView.selectedTitles = @[@"5", @"PM"];
+    [pickerView show];
+
+    
+//     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Single Picker" delegate:self];
+//    picker.actionToolbar.titleButton.titleFont = [UIFont systemFontOfSize:12];
+//    picker.actionToolbar.titleButton.titleColor = [UIColor redColor];
+//    [picker setTag:1];
+//    [picker setTitlesForComponents:@[@[@"First", @"Second", @"Third", @"Four", @"Five"]]];
+//    [picker show];
 }
 
 - (IBAction)twoPickerViewClicked:(UIButton *)sender {
@@ -101,7 +111,7 @@
 }
 
 - (IBAction)threePickerViewWithWidths:(UIButton *)sender {
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Range Selector With Size" delegate:self];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Range Selector With Size and this is a pretty long title used to test title display in action sheet picker view" delegate:self];
     [picker setTag:5];
     [picker setIsRangePickerView:YES];
     [picker setTitlesForComponents:@[@[@"100", @"200", @"300", @"400", @"500",@"600", @"700", @"800", @"900"],

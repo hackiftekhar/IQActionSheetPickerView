@@ -16,16 +16,11 @@
 {
  
     //IQActionSheetPickerView appearance setting
-    [[IQActionSheetTitleBarButtonItem appearance] setTitleFont:[UIFont systemFontOfSize:18]];
-    [[IQActionSheetTitleBarButtonItem appearance] setTitleColor:[UIColor redColor]];
-    [[IQActionSheetToolbar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[IQActionSheetToolbar appearance] setTintColor:[UIColor lightGrayColor]];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+//    [[IQActionSheetTitleBarButtonItem appearance] setTitleFont:[UIFont systemFontOfSize:18]];
+//    [[IQActionSheetTitleBarButtonItem appearance] setTitleColor:[UIColor redColor]];
+//    [[IQActionSheetToolbar appearance] setBarTintColor:[UIColor whiteColor]];
+//    [[IQActionSheetToolbar appearance] setTintColor:[UIColor lightGrayColor]];
+
     return YES;
 }
 

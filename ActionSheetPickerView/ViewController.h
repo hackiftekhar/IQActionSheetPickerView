@@ -18,11 +18,4 @@
 
 }
 
-- (IBAction)onePickerViewClicked:(UIButton *)sender;
-- (IBAction)twoPickerViewClicked:(UIButton *)sender;
-- (IBAction)threePickerViewClicked:(UIButton *)sender;
-- (IBAction)threePickerViewWithWidths:(UIButton *)sender;
-- (IBAction)datePickerViewClicked:(UIButton *)sender;
-- (IBAction)rangeSelectClicked:(UIButton *)sender;
-
 @end
