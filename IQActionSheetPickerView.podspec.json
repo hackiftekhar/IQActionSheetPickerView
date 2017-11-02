@@ -1,9 +1,9 @@
 {
     "name": "IQActionSheetPickerView",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "source": {
         "git": "https://github.com/hackiftekhar/IQActionSheetPickerView.git",
-        "tag": "v1.0.7"
+        "tag": "v1.0.8"
     },
     "summary": "ActionSheet with UIPickerView",
     "homepage": "http://github.com/hackiftekhar/IQActionSheetPickerView",
