@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C1D988A1F7645A500F5C2EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1D98891F7645A400F5C2EA /* Main.storyboard */; };
+		4C50DB181FAB105000118511 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C50DB171FAB105000118511 /* Launch.storyboard */; };
 		6CF4449C415468778B73981C /* Pods_ActionSheetPickerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8B0CA657AC7466BFCAAB18 /* Pods_ActionSheetPickerView.framework */; };
 		E640EA63182EADC100151E83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E640EA62182EADC100151E83 /* UIKit.framework */; };
 		E640EA65182EADC100151E83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E640EA64182EADC100151E83 /* Foundation.framework */; };
@@ -15,14 +16,12 @@
 		E640EA6D182EADC100151E83 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E640EA6B182EADC100151E83 /* InfoPlist.strings */; };
 		E640EA6F182EADC100151E83 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E640EA6E182EADC100151E83 /* main.m */; };
 		E640EA73182EADC100151E83 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E640EA72182EADC100151E83 /* AppDelegate.m */; };
-		E640EA75182EADC100151E83 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E640EA74182EADC100151E83 /* Default.png */; };
-		E640EA77182EADC100151E83 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E640EA76182EADC100151E83 /* Default@2x.png */; };
-		E640EA79182EADC100151E83 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E640EA78182EADC100151E83 /* Default-568h@2x.png */; };
 		E640EA7C182EADC100151E83 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E640EA7B182EADC100151E83 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C1D98891F7645A400F5C2EA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ActionSheetPickerView/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		4C50DB171FAB105000118511 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		53B202809B5F1035737D2BB2 /* Pods-ActionSheetPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActionSheetPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ActionSheetPickerView/Pods-ActionSheetPickerView.debug.xcconfig"; sourceTree = "<group>"; };
 		5F8B0CA657AC7466BFCAAB18 /* Pods_ActionSheetPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ActionSheetPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E640EA5E182EADC100151E83 /* ActionSheetPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActionSheetPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,9 +34,6 @@
 		E640EA70182EADC100151E83 /* ActionSheetPickerView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ActionSheetPickerView-Prefix.pch"; sourceTree = "<group>"; };
 		E640EA71182EADC100151E83 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E640EA72182EADC100151E83 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E640EA74182EADC100151E83 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		E640EA76182EADC100151E83 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		E640EA78182EADC100151E83 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E640EA7A182EADC100151E83 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E640EA7B182EADC100151E83 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EA73CE97AB8AB2932C413F34 /* Pods-ActionSheetPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActionSheetPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-ActionSheetPickerView/Pods-ActionSheetPickerView.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +100,7 @@
 				E640EA7A182EADC100151E83 /* ViewController.h */,
 				E640EA7B182EADC100151E83 /* ViewController.m */,
 				4C1D98891F7645A400F5C2EA /* Main.storyboard */,
+				4C50DB171FAB105000118511 /* Launch.storyboard */,
 				E640EA69182EADC100151E83 /* Supporting Files */,
 			);
 			path = ActionSheetPickerView;
@@ -116,9 +113,6 @@
 				E640EA6B182EADC100151E83 /* InfoPlist.strings */,
 				E640EA6E182EADC100151E83 /* main.m */,
 				E640EA70182EADC100151E83 /* ActionSheetPickerView-Prefix.pch */,
-				E640EA74182EADC100151E83 /* Default.png */,
-				E640EA76182EADC100151E83 /* Default@2x.png */,
-				E640EA78182EADC100151E83 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -184,10 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E640EA6D182EADC100151E83 /* InfoPlist.strings in Resources */,
-				E640EA75182EADC100151E83 /* Default.png in Resources */,
-				E640EA77182EADC100151E83 /* Default@2x.png in Resources */,
 				4C1D988A1F7645A500F5C2EA /* Main.storyboard in Resources */,
-				E640EA79182EADC100151E83 /* Default-568h@2x.png in Resources */,
+				4C50DB181FAB105000118511 /* Launch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

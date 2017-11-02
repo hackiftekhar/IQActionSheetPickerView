@@ -33,6 +33,9 @@
 
 @property(nonatomic, readonly) UITapGestureRecognizer *tappedDismissGestureRecognizer;
 
+@property (nullable, readwrite, strong) UIView *inputView;
+@property (nullable, readwrite, strong) UIView *inputAccessoryView;
+
 @end
 
 @implementation IQActionSheetViewController 

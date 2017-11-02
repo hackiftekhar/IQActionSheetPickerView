@@ -32,12 +32,10 @@
 #import <UIKit/UILabel.h>
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
-{
-    UIPickerView    *_pickerView;
-    UIDatePicker    *_datePicker;
-}
 
 @property(nonatomic, strong) IQActionSheetViewController *actionSheetController;
+@property(nonatomic, strong) UIPickerView *pickerView;
+@property(nonatomic, strong) UIDatePicker *datePicker;
 
 @end
 
@@ -57,10 +55,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
 {
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    rect.size.height = 216+44;
-    
-    self = [super initWithFrame:rect];
+    self = [super init];
 
     if (self)
     {
@@ -102,10 +97,10 @@
         _datePicker.translatesAutoresizingMaskIntoConstraints = NO;
 
         NSArray<NSLayoutConstraint*>*horizontalPickerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|[_pickerView]|" options:0 metrics:nil views:viewDict];
-        NSArray<NSLayoutConstraint*>*verticalPickerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_pickerView]|" options:NSLayoutFormatAlignAllLeading|NSLayoutFormatAlignAllTrailing metrics:nil views:viewDict];
+        NSArray<NSLayoutConstraint*>*verticalPickerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_pickerView]-|" options:NSLayoutFormatAlignAllLeading|NSLayoutFormatAlignAllTrailing metrics:nil views:viewDict];
 
         NSArray<NSLayoutConstraint*>*horizontalDateConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|[_datePicker]|" options:0 metrics:nil views:viewDict];
-        NSArray<NSLayoutConstraint*>*verticalDateConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_datePicker]|" options:0 metrics:nil views:viewDict];
+        NSArray<NSLayoutConstraint*>*verticalDateConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_datePicker]-|" options:0 metrics:nil views:viewDict];
 
         [self addConstraints:horizontalPickerConstraints];
         [self addConstraints:verticalPickerConstraints];
