@@ -58,9 +58,16 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 @protocol IQActionSheetPickerViewDelegate <NSObject>
 
 @optional
-- (void)actionSheetPickerView:(nonnull IQActionSheetPickerView *)pickerView didSelectTitles:(nonnull NSArray<NSString*>*)titles;
+- (void)actionSheetPickerView:(nonnull IQActionSheetPickerView *)pickerView didSelectTitlesAtIndexes:(nonnull NSArray<NSNumber*>*)indexes;
+- (void)actionSheetPickerView:(nonnull IQActionSheetPickerView *)pickerView didSelectTitles:(nonnull NSArray<NSString*>*)titles  __attribute__((deprecated("This is replaced by `actionSheetPickerView:didSelectTitlesAtIndexes`.")));    //If you implemented `actionSheetPickerView:didSelectTitlesAtIndexes:` delegate method then this method will not get called.
+
+
 - (void)actionSheetPickerView:(nonnull IQActionSheetPickerView *)pickerView didSelectDate:(nonnull NSDate*)date;
+
+
 - (void)actionSheetPickerView:(nonnull IQActionSheetPickerView *)pickerView didChangeRow:(NSInteger)row inComponent:(NSInteger)component;
+
+
 - (void)actionSheetPickerViewDidCancel:(nonnull IQActionSheetPickerView *)pickerView;
 - (void)actionSheetPickerViewWillCancel:(nonnull IQActionSheetPickerView *)pickerView;
 @end
@@ -126,14 +133,26 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
 ///-----------------------------------------
 
 /*!
- selected titles for each component. (Not Animated)
+ selected indexes for each component. (Not Animated)
  */
-@property(nullable, nonatomic, strong) NSArray<NSString*> *selectedTitles;
+@property(nullable, nonatomic, strong) NSArray<NSNumber*> *selectedIndexes;
 
 /*!
- set selected titles for each component.
+ Select the provided index row for each component. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.
  */
--(void)setSelectedTitles:(nonnull NSArray<NSString*> *)selectedTitles animated:(BOOL)animated;
+-(void)setSelectedIndexes:(nonnull NSArray<NSNumber*> *)selectedIndexes animated:(BOOL)animated;
+
+
+/*!
+ get selected row in component.
+ */
+-(NSInteger)selectedRowInComponent:(NSUInteger)component;
+
+/*!
+ Select a row in pickerView.
+ */
+-(void)selectRowAtIndexPath:(nonnull NSIndexPath*)indexPath;
+-(void)selectRowAtIndexPath:(nonnull NSIndexPath*)indexPath animated:(BOOL)animated;
 
 /*!
  Titles to show for component. For example. @[ @[ @"1", @"2", @"3", ], @[ @"11", @"12", @"13", ], @[ @"21", @"22", @"23", ]].
@@ -157,11 +176,6 @@ typedef NS_ENUM(NSUInteger, IQActionSheetPickerStyle) {
  *  Color for the UIPickerView
  */
 @property(nullable, nonatomic, strong) UIColor *pickerComponentsColor UI_APPEARANCE_SELECTOR;
-
-/*!
- Select the provided index row for each component. Ignore if actionSheetPickerStyle is IQActionSheetPickerStyleDatePicker.
- */
--(void)selectIndexes:(nonnull NSArray<NSNumber*> *)indexes animated:(BOOL)animated;
 
 /*!
  If YES then it will force to scroll third picker component to pick equal or larger row then the first.
