@@ -56,12 +56,20 @@
 {
     return YES;
 }
+
+-(void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
     
 -(void)viewDidLoad
 {
     [super viewDidLoad];
 
     [self.view addGestureRecognizer:self.tappedDismissGestureRecognizer];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(becomeFirstResponder)
+                                               name:UIApplicationWillEnterForegroundNotification
+                                             object:nil];
 }
 
 -(void)setDisableDismissOnTouchOutside:(BOOL)disableDismissOnTouchOutside
