@@ -89,6 +89,9 @@
             [_datePicker sizeToFit];
             [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
+            if (@available(iOS 14, *)) {
+                [_datePicker setPreferredDatePickerStyle:UIDatePickerStyleWheels];
+            }
             [self addSubview:_datePicker];
         }
         
