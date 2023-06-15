@@ -1,9 +1,9 @@
 {
     "name": "IQActionSheetPickerView",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "source": {
         "git": "https://github.com/hackiftekhar/IQActionSheetPickerView.git",
-        "tag": "v2.0.1"
+        "tag": "2.0.2"
     },
     "summary": "ActionSheet with UIPickerView",
     "homepage": "http://github.com/hackiftekhar/IQActionSheetPickerView",
@@ -13,7 +13,7 @@
         "Iftekhar Qurashi": "hack.iftekhar@gmail.com"
     },
     "platforms": {
-        "ios": "8.0"
+        "ios": "11.0"
     },
     "source_files": "IQActionSheetPickerView/*.{h,m}",
     "public_header_files": [
