@@ -1,6 +1,6 @@
 project 'ActionSheetPickerView.xcodeproj'
 
-platform :ios, '8.0'
+platform :ios, '11.0'
 use_frameworks!
 
 target 'ActionSheetPickerView' do

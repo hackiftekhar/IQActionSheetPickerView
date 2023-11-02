@@ -25,11 +25,6 @@
 #import "IQActionSheetViewController.h"
 #import "IQActionSheetToolbar.h"
 
-#import <UIKit/UIPickerView.h>
-#import <UIKit/UIDatePicker.h>
-#import <UIKit/UIWindow.h>
-#import <UIKit/UIScreen.h>
-#import <UIKit/UILabel.h>
 
 @interface IQActionSheetPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
 
@@ -89,7 +84,7 @@
             [_datePicker sizeToFit];
             [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
-            if (@available(iOS 14, *)) {
+            if (@available(iOS 13.4, *)) {
                 [_datePicker setPreferredDatePickerStyle:UIDatePickerStyleWheels];
             }
             [self addSubview:_datePicker];

@@ -21,7 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIBarButtonItem.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface IQActionSheetTitleBarButtonItem : UIBarButtonItem
 

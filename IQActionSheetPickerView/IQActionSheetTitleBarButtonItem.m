@@ -23,12 +23,6 @@
 
 #import "IQActionSheetTitleBarButtonItem.h"
 
-#import <UIKit/UIButton.h>
-#import <UIKit/UILabel.h>
-#import <UIKit/UIDatePicker.h>
-#import <UIKit/UIPickerView.h>
-#import <Foundation/NSDate.h>
-
 @implementation IQActionSheetTitleBarButtonItem
 {
     UIView *_titleView;
